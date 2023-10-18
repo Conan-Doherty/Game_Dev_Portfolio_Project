@@ -13,6 +13,8 @@ public class PlayerBehaviour : MonoBehaviour
     float currentSpeed;
     [SerializeField]
     InputActionReference Movement;
+    float rotatespeed = 5f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,6 @@ public class PlayerBehaviour : MonoBehaviour
         currentMovementInput = Movement.action.ReadValue<Vector2>();
         currentMovement = new Vector3(currentMovementInput.x, 0, currentMovementInput.y);
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
-
         
         currentMovement.y = 0f;
 
@@ -54,16 +55,37 @@ public class PlayerBehaviour : MonoBehaviour
         }
         else
         {
-
+            
             currentSpeed = Speed;
         }
-        this.transform.forward = currentMovement;
+        
+        
         characterController.Move(currentMovement * Time.deltaTime * currentSpeed);
+         
+        
+    }
+    void RotationHandler()
+    {
+        Vector3 positionToLookAt;
+        //The change in position our character should point to
+        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.y = 0.0f;
+        positionToLookAt.z = currentMovement.z;
+        //Current rotation of character
+        Quaternion currentRotationQuaternion = transform.rotation;
 
+        if (isMovementPressed)
+        {
+            //Creates a new rotation based on where the player is currently pressing
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotationQuaternion, targetRotation, rotatespeed * Time.deltaTime);
+        }
     }
     // Update is called once per frame
     void Update()
     {
         MovementHandler();
+        RotationHandler();
+        
     }
 }
