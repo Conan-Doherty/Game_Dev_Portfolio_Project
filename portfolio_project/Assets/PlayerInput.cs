@@ -35,6 +35,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e1b0f66-e52e-4818-844b-a5a95ec51331"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shuriken"",
+                    ""type"": ""Button"",
+                    ""id"": ""469f30e4-63c5-4816-ac23-c270a4a8c4c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""82762e63-500b-485e-ac4c-9327a4114b7f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +119,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02a4fb2d-63cb-4dc2-a1cc-b04a46d9e8a0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0daef24e-f149-4326-963a-ab9a363c8538"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shuriken"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7129db5-56ba-48c1-b519-dd42dd700b54"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +161,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // CharacterControl
         m_CharacterControl = asset.FindActionMap("CharacterControl", throwIfNotFound: true);
         m_CharacterControl_Movement = m_CharacterControl.FindAction("Movement", throwIfNotFound: true);
+        m_CharacterControl_interact = m_CharacterControl.FindAction("interact", throwIfNotFound: true);
+        m_CharacterControl_Shuriken = m_CharacterControl.FindAction("Shuriken", throwIfNotFound: true);
+        m_CharacterControl_Dash = m_CharacterControl.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +226,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CharacterControl;
     private List<ICharacterControlActions> m_CharacterControlActionsCallbackInterfaces = new List<ICharacterControlActions>();
     private readonly InputAction m_CharacterControl_Movement;
+    private readonly InputAction m_CharacterControl_interact;
+    private readonly InputAction m_CharacterControl_Shuriken;
+    private readonly InputAction m_CharacterControl_Dash;
     public struct CharacterControlActions
     {
         private @PlayerInput m_Wrapper;
         public CharacterControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_CharacterControl_Movement;
+        public InputAction @interact => m_Wrapper.m_CharacterControl_interact;
+        public InputAction @Shuriken => m_Wrapper.m_CharacterControl_Shuriken;
+        public InputAction @Dash => m_Wrapper.m_CharacterControl_Dash;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +249,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @interact.started += instance.OnInteract;
+            @interact.performed += instance.OnInteract;
+            @interact.canceled += instance.OnInteract;
+            @Shuriken.started += instance.OnShuriken;
+            @Shuriken.performed += instance.OnShuriken;
+            @Shuriken.canceled += instance.OnShuriken;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -187,6 +265,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @interact.started -= instance.OnInteract;
+            @interact.performed -= instance.OnInteract;
+            @interact.canceled -= instance.OnInteract;
+            @Shuriken.started -= instance.OnShuriken;
+            @Shuriken.performed -= instance.OnShuriken;
+            @Shuriken.canceled -= instance.OnShuriken;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -207,5 +294,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface ICharacterControlActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnShuriken(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

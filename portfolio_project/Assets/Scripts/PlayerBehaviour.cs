@@ -26,16 +26,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
 
         //Enables the character controlls action map
-        
+       // playerInput.CharacterControl.Enable();
         Movement.action.Enable(); 
         
     }
 
     void OnDisable()
     {
-       
+
         //Disables the character controlls action map
-        
+      //  playerInput.CharacterControl.Disable();
         Movement.action.Disable();
        
     }
@@ -63,6 +63,24 @@ public class PlayerBehaviour : MonoBehaviour
         characterController.Move(currentMovement * Time.deltaTime * currentSpeed);
          
         
+    }
+    void OnDash()
+    {
+        Speed = 8f;
+        StartCoroutine(resetspeed());
+    }
+    void OnInteract()
+    {
+        Debug.Log("interact");
+    }
+    void OnShuriken()
+    {
+        Debug.Log("shuriken");
+    }
+    IEnumerator resetspeed()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Speed = 2f;
     }
     void RotationHandler()
     {
