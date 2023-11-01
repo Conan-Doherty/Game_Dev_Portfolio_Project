@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
     InputActionReference Movement;
     [SerializeField]
     float rotatespeed = 5f;
-    
+    float playervelocity = -1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +48,9 @@ public class PlayerBehaviour : MonoBehaviour
         currentMovementInput = Movement.action.ReadValue<Vector2>();
         currentMovement = new Vector3(currentMovementInput.x, 0, currentMovementInput.y);
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
-        
-        currentMovement.y = -1f;
+
+        currentMovement.y = 0f;
+
 
         if (!isMovementPressed)
         {
@@ -107,6 +108,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         MovementHandler();
         RotationHandler();
+        
     }
-    
+   
 }
