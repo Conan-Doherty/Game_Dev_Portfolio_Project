@@ -37,7 +37,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""interact"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""8e1b0f66-e52e-4818-844b-a5a95ec51331"",
                     ""expectedControlType"": ""Button"",
@@ -127,7 +127,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""interact"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -161,7 +161,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // CharacterControl
         m_CharacterControl = asset.FindActionMap("CharacterControl", throwIfNotFound: true);
         m_CharacterControl_Movement = m_CharacterControl.FindAction("Movement", throwIfNotFound: true);
-        m_CharacterControl_interact = m_CharacterControl.FindAction("interact", throwIfNotFound: true);
+        m_CharacterControl_Interact = m_CharacterControl.FindAction("Interact", throwIfNotFound: true);
         m_CharacterControl_Shuriken = m_CharacterControl.FindAction("Shuriken", throwIfNotFound: true);
         m_CharacterControl_Dash = m_CharacterControl.FindAction("Dash", throwIfNotFound: true);
     }
@@ -226,7 +226,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CharacterControl;
     private List<ICharacterControlActions> m_CharacterControlActionsCallbackInterfaces = new List<ICharacterControlActions>();
     private readonly InputAction m_CharacterControl_Movement;
-    private readonly InputAction m_CharacterControl_interact;
+    private readonly InputAction m_CharacterControl_Interact;
     private readonly InputAction m_CharacterControl_Shuriken;
     private readonly InputAction m_CharacterControl_Dash;
     public struct CharacterControlActions
@@ -234,7 +234,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         private @PlayerInput m_Wrapper;
         public CharacterControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_CharacterControl_Movement;
-        public InputAction @interact => m_Wrapper.m_CharacterControl_interact;
+        public InputAction @Interact => m_Wrapper.m_CharacterControl_Interact;
         public InputAction @Shuriken => m_Wrapper.m_CharacterControl_Shuriken;
         public InputAction @Dash => m_Wrapper.m_CharacterControl_Dash;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
@@ -249,9 +249,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @interact.started += instance.OnInteract;
-            @interact.performed += instance.OnInteract;
-            @interact.canceled += instance.OnInteract;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
             @Shuriken.started += instance.OnShuriken;
             @Shuriken.performed += instance.OnShuriken;
             @Shuriken.canceled += instance.OnShuriken;
@@ -265,9 +265,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @interact.started -= instance.OnInteract;
-            @interact.performed -= instance.OnInteract;
-            @interact.canceled -= instance.OnInteract;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
             @Shuriken.started -= instance.OnShuriken;
             @Shuriken.performed -= instance.OnShuriken;
             @Shuriken.canceled -= instance.OnShuriken;

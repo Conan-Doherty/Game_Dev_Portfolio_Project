@@ -9,10 +9,13 @@ public class PlayerBehaviour : MonoBehaviour
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     bool isMovementPressed;
+    [SerializeField]
     float Speed = 2f;
+    [SerializeField]
     float currentSpeed;
     [SerializeField]
     InputActionReference Movement;
+    [SerializeField]
     float rotatespeed = 5f;
     
     // Start is called before the first frame update
@@ -46,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
         currentMovement = new Vector3(currentMovementInput.x, 0, currentMovementInput.y);
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
         
-        currentMovement.y = 0f;
+        currentMovement.y = -1f;
 
         if (!isMovementPressed)
         {
@@ -104,6 +107,6 @@ public class PlayerBehaviour : MonoBehaviour
     {
         MovementHandler();
         RotationHandler();
-        
     }
+    
 }
