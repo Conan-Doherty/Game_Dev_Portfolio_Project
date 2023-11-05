@@ -18,12 +18,21 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     float rotatespeed = 5f;
     float playervelocity = -1f;
+    public GameObject shuriken;
+    [SerializeField]
+    float shurikenthrowdelay = 1f;
+    float shurikendelayelapsedtime = 0f;
+    [SerializeField]
+    Transform throwpoint;
+    public HealthBar healthbar;
+   // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = new PlayerInput();
-        characterController = GetComponent<CharacterController>(); 
+        characterController = GetComponent<CharacterController>();
+        
     }
     void OnEnable()
     {
@@ -79,7 +88,18 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void OnShuriken()
     {
-        Debug.Log("shuriken");
+       
+        if(GameManager.gameManager.itemscollected._currentammo > 0 && shurikendelayelapsedtime >= shurikenthrowdelay)
+        {
+            Debug.Log("shuriken");
+            shurikendelayelapsedtime = 0;
+            Playerdropammo();
+            Instantiate(shuriken, throwpoint.position, throwpoint.rotation);
+        }
+        else
+        {
+            return;
+        }
     }
     IEnumerator resetspeed()
     {
@@ -108,7 +128,74 @@ public class PlayerBehaviour : MonoBehaviour
     {
         MovementHandler();
         RotationHandler();
-        
+        shurikendelayelapsedtime += Time.deltaTime;
     }
-   
+    public void PlayerPickupammo()
+    {
+        GameManager.gameManager.itemscollected.addammo();
+        //pickup.PlayOneShot(pickup.clip, 0.5f);
+    }
+    public void Playerdropammo()
+    {
+        GameManager.gameManager.itemscollected.removeammo();
+    }
+    public void PlayerPickupintel()
+    {
+        GameManager.gameManager.itemscollected.addtreasure();
+        //pickup.PlayOneShot(pickup.clip, 0.5f);
+    }
+    public void Playeraddkill()
+    {
+        GameManager.gameManager.itemscollected.addkill();
+    }
+    public void PlayerTakeDmg(int dmg)
+    {
+        GameManager.gameManager._PlayerHealth.dmgUnit(dmg);
+        healthbar.sethealth(GameManager.gameManager._PlayerHealth.Health);
+    }
+    public void Playerhealdmg(int heal)
+    {
+        GameManager.gameManager._PlayerHealth.HealUnit(heal);
+        healthbar.sethealth(GameManager.gameManager._PlayerHealth.Health);
+       // pickup.PlayOneShot(pickup.clip, 0.5f);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            PlayerTakeDmg(10);
+            Playeraddkill();
+
+
+        }
+        if (other.gameObject.CompareTag("deadzone"))
+        {
+            PlayerTakeDmg(100);
+        }
+        if (other.gameObject.CompareTag("projectile"))
+        {
+            PlayerTakeDmg(25);
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("ammo"))
+        {
+            PlayerPickupammo();
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("treasure"))
+        {
+            PlayerPickupintel();
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("goal"))
+        {
+            GameManager.gameManager.GoalReached();
+        }
+        if (other.gameObject.CompareTag("repair"))
+        {
+            Playerhealdmg(50);
+            Destroy(other.gameObject);
+        }
+    }
 }
+
