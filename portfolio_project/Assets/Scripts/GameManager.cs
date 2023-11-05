@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     public GameObject deadmenu;
     public GameObject Winmenu;
     public GameObject player;
-    public ItemCollector itemscollected = new ItemCollector(0, 0);
+    public ItemCollector itemscollected = new ItemCollector(0, 0, 0);
     public TextMeshProUGUI score;
     public TextMeshProUGUI Kills;
     public TextMeshProUGUI treasurecollected;
     public TextMeshProUGUI score2;
     public TextMeshProUGUI Ammo;
+    public TextMeshProUGUI Keys;
+    public TextMeshProUGUI Timetaken;
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,9 +48,11 @@ public class GameManager : MonoBehaviour
         }
         Kills.text = "" + itemscollected._currentkills;
         treasurecollected.text = "" + itemscollected._currenttreasure;
+        Keys.text = "" + itemscollected._currentkeys;
         score.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
         score2.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
         Ammo.text = "" + itemscollected._currentammo;
+        Timetaken.text = "" + Time.deltaTime;
     }
     public void GoalReached()
     {

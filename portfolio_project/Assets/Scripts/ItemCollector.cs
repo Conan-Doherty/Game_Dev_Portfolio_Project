@@ -7,6 +7,12 @@ public class ItemCollector
     public int _currentkills = 0;
     public int _currenttreasure = 0;
     public int _currentammo = 3;
+    public int _currentkeys = 0;
+    public int Keys
+    {
+        get { return _currentkeys; }
+        set { _currentkeys = value; }
+    }
     public int Kills
     {
         get { return _currentkills; }
@@ -22,10 +28,15 @@ public class ItemCollector
         get { return _currentammo; }
         set { _currentammo = value; }
     }
-    public ItemCollector(int kills, int Treasure)
+    public ItemCollector(int kills, int Treasure,int Keys)
     {
         _currentkills = kills;
         _currenttreasure = Treasure;
+        _currentkeys = Keys;
+    }
+    public void addkey()
+    {
+        _currentkeys++;
     }
     public void addkill()
     {

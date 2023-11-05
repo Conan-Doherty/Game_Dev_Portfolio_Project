@@ -25,6 +25,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     Transform throwpoint;
     public HealthBar healthbar;
+    public DashBar dashbar;
+    int Dashamount = 3;
    // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()
@@ -79,8 +81,14 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void OnDash()
     {
-        Speed = 8f;
-        StartCoroutine(resetspeed());
+        if (Dashamount > 0 && Speed == 2f)
+        {
+            Speed = 8f;
+            Dashamount--;
+            StartCoroutine(resetspeed());
+            StartCoroutine(dashregen());
+            dashbar.setdashamount(Dashamount);
+        }
     }
     void OnInteract()
     {
@@ -105,6 +113,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Speed = 2f;
+    }
+    IEnumerator dashregen()
+    {
+        yield return new WaitForSeconds(6f);
+        Dashamount++;
+        dashbar.setdashamount(Dashamount);
     }
     void RotationHandler()
     {
@@ -159,7 +173,7 @@ public class PlayerBehaviour : MonoBehaviour
         healthbar.sethealth(GameManager.gameManager._PlayerHealth.Health);
        // pickup.PlayOneShot(pickup.clip, 0.5f);
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
