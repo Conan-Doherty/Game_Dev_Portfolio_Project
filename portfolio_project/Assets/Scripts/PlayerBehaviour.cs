@@ -27,6 +27,7 @@ public class PlayerBehaviour : MonoBehaviour
     public HealthBar healthbar;
     public DashBar dashbar;
     int Dashamount = 3;
+    Animator animator;
    // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class PlayerBehaviour : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
-        
+        animator = GetComponent<Animator>();
     }
     void OnEnable()
     {
@@ -65,12 +66,12 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (!isMovementPressed)
         {
-
+            animator.SetBool("Ismoving", false);
             currentSpeed = 0f;
         }
         else
         {
-            
+            animator.SetBool("Ismoving", true);
             currentSpeed = Speed;
         }
         
@@ -83,11 +84,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (Dashamount > 0 && Speed == 2f)
         {
+            animator.SetBool("Ismoving", true);
+            animator.SetBool("IsDashing", true);
             Speed = 8f;
             Dashamount--;
             StartCoroutine(resetspeed());
             StartCoroutine(dashregen());
             dashbar.setdashamount(Dashamount);
+
         }
     }
     void OnInteract()
@@ -113,6 +117,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Speed = 2f;
+        animator.SetBool("IsDashing", false);
     }
     IEnumerator dashregen()
     {
@@ -123,6 +128,13 @@ public class PlayerBehaviour : MonoBehaviour
     void OnAttack()
     {
         Debug.Log("Attack");
+
+
+
+
+
+
+
     }
     void RotationHandler()
     {
@@ -179,7 +191,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Laser"))
         {
             PlayerTakeDmg(10);
             Playeraddkill();
