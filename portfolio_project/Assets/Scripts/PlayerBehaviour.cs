@@ -10,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
     Vector3 currentMovement;
     bool isMovementPressed;
     [SerializeField]
-    float Speed = 2f;
+    float Speed = 4f;
     [SerializeField]
     float currentSpeed;
     [SerializeField]
@@ -82,11 +82,11 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void OnDash()
     {
-        if (Dashamount > 0 && Speed == 2f)
+        if (Dashamount > 0 && Speed == 4f)
         {
             animator.SetBool("Ismoving", true);
             animator.SetBool("IsDashing", true);
-            Speed = 8f;
+            Speed = 16f;
             Dashamount--;
             StartCoroutine(resetspeed());
             StartCoroutine(dashregen());
@@ -116,7 +116,7 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator resetspeed()
     {
         yield return new WaitForSeconds(0.5f);
-        Speed = 2f;
+        Speed = 4f;
         animator.SetBool("IsDashing", false);
     }
     IEnumerator dashregen()
@@ -125,11 +125,18 @@ public class PlayerBehaviour : MonoBehaviour
         Dashamount++;
         dashbar.setdashamount(Dashamount);
     }
+    IEnumerator Attackfinisher()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("IsAttacking", false);
+        Speed = 4f;
+    }
     void OnAttack()
     {
         Debug.Log("Attack");
-
-
+        animator.SetBool("IsAttacking", true);
+        Speed = 0f;
+        StartCoroutine(Attackfinisher());
 
 
 

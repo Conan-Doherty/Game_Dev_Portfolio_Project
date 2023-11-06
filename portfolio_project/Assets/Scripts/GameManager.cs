@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI Ammo;
     public TextMeshProUGUI Keys;
     public TextMeshProUGUI Timetaken;
+    float completetime = 0f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -52,7 +53,8 @@ public class GameManager : MonoBehaviour
         score.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
         score2.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
         Ammo.text = "" + itemscollected._currentammo;
-        Timetaken.text = "" + Time.deltaTime;
+        completetime += Time.deltaTime;
+        Timetaken.text = "" + completetime;
     }
     public void GoalReached()
     {
