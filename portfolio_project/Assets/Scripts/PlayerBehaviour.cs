@@ -120,6 +120,10 @@ public class PlayerBehaviour : MonoBehaviour
         Dashamount++;
         dashbar.setdashamount(Dashamount);
     }
+    void OnAttack()
+    {
+        Debug.Log("Attack");
+    }
     void RotationHandler()
     {
         Vector3 positionToLookAt;
