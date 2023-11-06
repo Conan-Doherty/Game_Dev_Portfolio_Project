@@ -131,16 +131,25 @@ public class PlayerBehaviour : MonoBehaviour
         animator.SetBool("IsAttacking", false);
         Speed = 4f;
     }
+    IEnumerator ParryFinisher()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("IsParrying", false);
+        Speed = 4f;
+    }
     void OnAttack()
     {
         Debug.Log("Attack");
         animator.SetBool("IsAttacking", true);
         Speed = 0f;
         StartCoroutine(Attackfinisher());
-
-
-
-
+    }
+    void OnParry()
+    {
+        Debug.Log("Parry");
+        animator.SetBool("IsParrying", true);
+        Speed = 0f;
+        StartCoroutine(ParryFinisher());
 
     }
     void RotationHandler()
