@@ -20,7 +20,7 @@ public class shurikencollision : MonoBehaviour
         shurikenelapsedtime += Time.deltaTime;
         if(shurikenelapsedtime >= shurikendestroydelay)
         {
-            Destroy(thisone);
+            Destroy(this.gameObject);
         }
     }
 }
