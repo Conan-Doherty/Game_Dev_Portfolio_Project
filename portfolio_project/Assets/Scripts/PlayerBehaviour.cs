@@ -24,6 +24,10 @@ public class PlayerBehaviour : MonoBehaviour
     float shurikendelayelapsedtime = 0f;
     [SerializeField]
     Transform throwpoint;
+    [SerializeField]
+    float parrydelay = 1f;
+    float parrydelayelapsedtime = 0f;
+    public GameObject parryuiobj;
     public HealthBar healthbar;
     public DashBar dashbar;
     int Dashamount = 3;
@@ -136,6 +140,7 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         animator.SetBool("IsParrying", false);
         Speed = 4f;
+        parryuiobj.SetActive(true);
     }
     void OnAttack()
     {
@@ -146,10 +151,15 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void OnParry()
     {
-        Debug.Log("Parry");
-        animator.SetBool("IsParrying", true);
-        Speed = 0f;
-        StartCoroutine(ParryFinisher());
+        if(parrydelayelapsedtime >= parrydelay)
+        {
+            parryuiobj.SetActive(false);
+            Debug.Log("Parry");
+            animator.SetBool("IsParrying", true);
+            Speed = 0f;
+            StartCoroutine(ParryFinisher());
+        }
+        
 
     }
     void RotationHandler()
@@ -175,6 +185,7 @@ public class PlayerBehaviour : MonoBehaviour
         MovementHandler();
         RotationHandler();
         shurikendelayelapsedtime += Time.deltaTime;
+        parrydelayelapsedtime += Time.deltaTime;
     }
     public void PlayerPickupammo()
     {

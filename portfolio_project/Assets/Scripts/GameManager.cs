@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI Keys;
     public TextMeshProUGUI Timetaken;
     float completetime = 0f;
+    public GameObject shuriken1, shuriken2, shuriken3;
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         {
             deadplayer();
         }
+        shurikencounter();
         Kills.text = "" + itemscollected._currentkills;
         treasurecollected.text = "" + itemscollected._currenttreasure;
         Keys.text = "" + itemscollected._currentkeys;
@@ -55,6 +57,34 @@ public class GameManager : MonoBehaviour
         Ammo.text = "" + itemscollected._currentammo;
         completetime += Time.deltaTime;
         Timetaken.text = "" + completetime;
+    }
+    void shurikencounter()
+    {
+        if (itemscollected._currentammo == 0)
+        {
+            shuriken1.SetActive(false);
+            shuriken2.SetActive(false);
+            shuriken3.SetActive(false);
+        }
+        else if(itemscollected._currentammo == 1)
+        {
+            shuriken1.SetActive(true);
+            shuriken2.SetActive(false);
+            shuriken3.SetActive(false);
+
+        }
+        else if(itemscollected._currentammo == 2)
+        {
+            shuriken1.SetActive(true);
+            shuriken2.SetActive(true);
+            shuriken3.SetActive(false);
+        }
+        else if(itemscollected._currentammo == 3)
+        {
+            shuriken1.SetActive(true);
+            shuriken2.SetActive(true);
+            shuriken3.SetActive(true);
+        }
     }
     public void GoalReached()
     {
