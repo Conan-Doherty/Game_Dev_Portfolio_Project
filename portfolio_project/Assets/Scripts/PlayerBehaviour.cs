@@ -25,13 +25,14 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     Transform throwpoint;
     [SerializeField]
-    float parrydelay = 1f;
+    float parrydelay = 2f;
     float parrydelayelapsedtime = 0f;
     public GameObject parryuiobj;
     public HealthBar healthbar;
     public DashBar dashbar;
     int Dashamount = 3;
     Animator animator;
+    bool canparry = true;
    // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()
@@ -140,7 +141,9 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         animator.SetBool("IsParrying", false);
         Speed = 4f;
+        yield return new WaitForSeconds(parrydelay);
         parryuiobj.SetActive(true);
+        canparry = true;
     }
     void OnAttack()
     {
@@ -151,8 +154,9 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void OnParry()
     {
-        if(parrydelayelapsedtime >= parrydelay)
+        if(canparry)
         {
+            canparry= false;
             parryuiobj.SetActive(false);
             Debug.Log("Parry");
             animator.SetBool("IsParrying", true);
@@ -185,7 +189,7 @@ public class PlayerBehaviour : MonoBehaviour
         MovementHandler();
         RotationHandler();
         shurikendelayelapsedtime += Time.deltaTime;
-        parrydelayelapsedtime += Time.deltaTime;
+       // parrydelayelapsedtime += Time.deltaTime;
     }
     public void PlayerPickupammo()
     {
