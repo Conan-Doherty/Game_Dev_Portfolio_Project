@@ -147,8 +147,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (other.tag == "Sword")
         {
+            DestroyEnemy();
             TakeDamage(1);
         }
     }
-
+    
 }
