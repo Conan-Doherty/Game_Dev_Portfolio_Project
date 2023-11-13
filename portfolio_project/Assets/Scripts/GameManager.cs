@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour
     public GameObject Winmenu;
     public GameObject player;
     public ItemCollector itemscollected = new ItemCollector(0, 0, 0);
-    public TextMeshProUGUI score;
-    public TextMeshProUGUI Kills;
-    public TextMeshProUGUI treasurecollected;
-    public TextMeshProUGUI score2;
-    public TextMeshProUGUI Ammo;
-    public TextMeshProUGUI Keys;
-    public TextMeshProUGUI Timetaken;
+   // public TextMeshProUGUI score;
+   // public TextMeshProUGUI Kills;
+    //public TextMeshProUGUI treasurecollected;
+    //public TextMeshProUGUI score2;
+    //public TextMeshProUGUI Ammo;
+    //public TextMeshProUGUI Keys;
+    //public TextMeshProUGUI Timetaken;
     float completetime = 0f;
     public GameObject shuriken1, shuriken2, shuriken3;
     // Start is called before the first frame update
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             deadplayer();
         }
         shurikencounter();
-        Kills.text = "" + itemscollected._currentkills;
+        /*Kills.text = "" + itemscollected._currentkills;
         treasurecollected.text = "" + itemscollected._currenttreasure;
         Keys.text = "" + itemscollected._currentkeys;
         score.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         Ammo.text = "" + itemscollected._currentammo;
         completetime += Time.deltaTime;
         Timetaken.text = "" + completetime;
+        */
     }
     void shurikencounter()
     {
