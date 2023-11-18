@@ -7145,7 +7145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34042525, y: 0.0000000228801, z: -0.000000008283737, w: 0.9402716}
+  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.000000008283735, w: 0.9402716}
   m_LocalPosition: {x: 76.5, y: 0.5, z: 35.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9234,6 +9234,7 @@ GameObject:
   - component: {fileID: 1853272351}
   - component: {fileID: 1853272350}
   - component: {fileID: 1853272352}
+  - component: {fileID: 1853272353}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -9288,7 +9289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853272349}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34042525, y: 0.0000000228801, z: -0.000000008283737, w: 0.9402716}
+  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.000000008283735, w: 0.9402716}
   m_LocalPosition: {x: 76.5, y: 0.5, z: 35.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9316,6 +9317,27 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 0}
     weight: 1
+--- !u!114 &1853272353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853272349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923e1d6d94a052749bbb4f861ee0df28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshDetectionType: 2
+  allowSkinnedMeshRenderes: 1
+  detectFromInsideCollider: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  time: 1
+  minimalOpacity: 0.1
+  playerTransform: {fileID: 245279297}
 --- !u!1 &1856340938
 GameObject:
   m_ObjectHideFlags: 0
