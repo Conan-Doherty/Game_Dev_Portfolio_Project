@@ -6,6 +6,8 @@ TagManager:
   tags:
   - deadzone
   - Sword
+  - enemy
+  - projectile
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - whatIsWall
   - enemy
   - hurty
-  - 
+  - door
   - 
   - 
   - 

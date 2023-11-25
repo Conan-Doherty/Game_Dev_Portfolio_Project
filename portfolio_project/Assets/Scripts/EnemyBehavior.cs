@@ -121,10 +121,22 @@ public class EnemyBehavior : MonoBehaviour
         alreadyAttacked = false;
     }
 
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sword"))
+        {
+            TakeDamage(1);
+            Debug.Log("sword collided");
+        }
+    }
+
+
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        Debug.Log("damage taken");
         if (health <= 0)
         {
             Invoke(nameof(DestroyEnemy), 0.5f);
@@ -142,14 +154,6 @@ public class EnemyBehavior : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Sword")
-        {
-            DestroyEnemy();
-            TakeDamage(1);
-        }
     }
     
 }
