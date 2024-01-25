@@ -15,6 +15,7 @@ public class DoorControler : MonoBehaviour
     bool isopening = false;
     [SerializeField]
     float openclosedelay = 1.75f;
+    public bool islocked;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +42,24 @@ public class DoorControler : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (islocked)
         {
-            StartCoroutine(open());
-           
-          
+            if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)
+            {
+                GameManager.gameManager.itemscollected.removekey();
+                StartCoroutine(open());
+
+
+            }
+        }
+        else
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                StartCoroutine(open());
+
+
+            }
         }
     }
     void OnTriggerExit(Collider other)

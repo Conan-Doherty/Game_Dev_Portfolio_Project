@@ -38,6 +38,10 @@ public class ItemCollector
     {
         _currentkeys++;
     }
+    public void removekey() 
+    { 
+        _currentkeys--;
+    }
     public void addkill()
     {
         _currentkills++;

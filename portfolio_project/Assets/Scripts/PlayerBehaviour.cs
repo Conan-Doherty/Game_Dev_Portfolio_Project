@@ -220,6 +220,10 @@ public class PlayerBehaviour : MonoBehaviour
         healthbar.sethealth(GameManager.gameManager._PlayerHealth.Health);
        // pickup.PlayOneShot(pickup.clip, 0.5f);
     }
+    public void playerpickupkey()
+    {
+        GameManager.gameManager.itemscollected.addkey();
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Laser"))
@@ -255,6 +259,11 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("repair"))
         {
             Playerhealdmg(50);
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("key"))
+        {
+            playerpickupkey();
             Destroy(other.gameObject);
         }
     }
