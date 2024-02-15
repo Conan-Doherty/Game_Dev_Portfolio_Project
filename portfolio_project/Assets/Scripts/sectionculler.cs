@@ -20,23 +20,26 @@ public class sectionculler : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(second.activeSelf)
+        if (other.gameObject.CompareTag("player"))
         {
-            second.SetActive(false);
-        }
-        else
-        {
-            second.SetActive(true);
-            blocker.SetActive(true);
-        }
-        if (first.activeSelf)
-        {
-            first.SetActive(false);
-        }
-        else
-        {
-            first.SetActive(true);
-            blocker.SetActive(false);
+            if (second.activeSelf)
+            {
+                second.SetActive(false);
+            }
+            else
+            {
+                second.SetActive(true);
+                blocker.SetActive(true);
+            }
+            if (first.activeSelf)
+            {
+                first.SetActive(false);
+            }
+            else
+            {
+                first.SetActive(true);
+                blocker.SetActive(false);
+            }
         }
     }
 }

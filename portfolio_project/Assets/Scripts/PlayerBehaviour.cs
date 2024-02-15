@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -261,8 +262,13 @@ public class PlayerBehaviour : MonoBehaviour
             Playerhealdmg(50);
             Destroy(other.gameObject);
         }
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.CompareTag("key"))
         {
+            Debug.Log("works");
             playerpickupkey();
             Destroy(other.gameObject);
         }
