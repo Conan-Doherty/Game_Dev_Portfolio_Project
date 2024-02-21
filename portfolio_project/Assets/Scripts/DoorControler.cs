@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorControler : MonoBehaviour
+public class DoorControler : MonoBehaviour // doors lacked usable animations so i wrote this to compensate
 {
-    
+    //serialized/public fields for the object references and other values for ease of interaction
     [SerializeField]
     GameObject door1;
     [SerializeField]
@@ -27,7 +27,7 @@ public class DoorControler : MonoBehaviour
     {
 
 
-
+        //the following if statements check for player precense using the booleans and then open or close the doors as nessesary
         if (isclosing)
         {
             door1.transform.Translate(Vector3.right*Time.deltaTime);
@@ -40,12 +40,13 @@ public class DoorControler : MonoBehaviour
         }
 
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)// trigger detection checks for player keys if the door is set to locked but defaults to open if it isnt locked
     {
         if (islocked)
         {
             if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)
             {
+                if(other.GetComponent<PlayerBehaviour>().)
                 GameManager.gameManager.itemscollected.removekey();
                 StartCoroutine(open());
 
@@ -62,7 +63,7 @@ public class DoorControler : MonoBehaviour
             }
         }
     }
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)//closes the door after player is outside the area of influence
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -70,13 +71,13 @@ public class DoorControler : MonoBehaviour
             StartCoroutine(close());
         }
     }
-    IEnumerator open()
+    IEnumerator open()//times the opening
     {
         isopening= true;
         yield return new WaitForSeconds(openclosedelay);
         isopening= false;
     }
-    IEnumerator close()
+    IEnumerator close()//times the closing
     {
         isclosing = true;
         yield return new WaitForSeconds(openclosedelay);

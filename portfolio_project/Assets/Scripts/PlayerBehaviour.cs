@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour//main player control script
 {
     PlayerInput playerInput;
     CharacterController characterController;
@@ -28,6 +28,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     float parrydelay = 2f;
     float parrydelayelapsedtime = 0f;
+    bool isparrying = false;
+    bool isinteracting = false;
     public GameObject parryuiobj;
     public HealthBar healthbar;
     public DashBar dashbar;
@@ -36,14 +38,14 @@ public class PlayerBehaviour : MonoBehaviour
     bool canparry = true;
    // public AudioSource pickup;
     // Start is called before the first frame update
-    void Start()
+    void Start()//grabs/creates instances on start
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
-    void OnEnable()
+    void OnEnable()//enable inputs
     {
 
         //Enables the character controlls action map
@@ -52,7 +54,7 @@ public class PlayerBehaviour : MonoBehaviour
         
     }
 
-    void OnDisable()
+    void OnDisable()//disable inputs
     {
 
         //Disables the character controlls action map
@@ -60,7 +62,7 @@ public class PlayerBehaviour : MonoBehaviour
         Movement.action.Disable();
        
     }
-    void MovementHandler()
+    void MovementHandler()//handles input of movement data and translates it into movement and animation
     {
         
         currentMovementInput = Movement.action.ReadValue<Vector2>();
@@ -86,7 +88,7 @@ public class PlayerBehaviour : MonoBehaviour
          
         
     }
-    void OnDash()
+    void OnDash()//alters speed if player is dashing and is able to
     {
         if (Dashamount > 0 && Speed == 4f)
         {
@@ -100,11 +102,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
     }
-    void OnInteract()
+    void OnInteract()// interact function will check for locked doors for opening them
     {
+        isinteracting = true;
         Debug.Log("interact");
+        isinteracting= false;
     }
-    void OnShuriken()
+    void OnShuriken()// when shuriken button is pressed if the player still has some it increments down one and then creates a instance of one
     {
        
         if(GameManager.gameManager.itemscollected._currentammo > 0 && shurikendelayelapsedtime >= shurikenthrowdelay)
@@ -119,6 +123,7 @@ public class PlayerBehaviour : MonoBehaviour
             return;
         }
     }
+    //below are several inumerators used for managing the values with specific inputs and functions as well as aiding animation
     IEnumerator resetspeed()
     {
         yield return new WaitForSeconds(0.5f);
@@ -145,6 +150,7 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(parrydelay);
         parryuiobj.SetActive(true);
         canparry = true;
+        isparrying = false;
     }
     void OnAttack()
     {
@@ -157,6 +163,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(canparry)
         {
+            isparrying = true;
             canparry= false;
             parryuiobj.SetActive(false);
             Debug.Log("Parry");
@@ -167,7 +174,7 @@ public class PlayerBehaviour : MonoBehaviour
         
 
     }
-    void RotationHandler()
+    void RotationHandler()//handles rotation input data for player so it rotates smoothly
     {
         Vector3 positionToLookAt;
         //The change in position our character should point to
@@ -192,6 +199,7 @@ public class PlayerBehaviour : MonoBehaviour
         shurikendelayelapsedtime += Time.deltaTime;
        // parrydelayelapsedtime += Time.deltaTime;
     }
+    //below are several methods used for adding things to the item collector or health values 
     public void PlayerPickupammo()
     {
         GameManager.gameManager.itemscollected.addammo();
@@ -225,6 +233,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         GameManager.gameManager.itemscollected.addkey();
     }
+    //below checks for collisions and if tag conditions are right will execute the code inside
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Laser"))
@@ -264,6 +273,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
     }
+    //same as above comment
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("key"))
