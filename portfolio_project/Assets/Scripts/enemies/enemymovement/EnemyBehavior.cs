@@ -21,9 +21,10 @@ public class EnemyBehavior : MonoBehaviour
     public int timeout = 1000;
 
     //Attacking
-    public int attacktype = 0;
-    public Grunt gruntScript;
-    public Burster bursterScript;
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public GameObject projectile;
+    public Transform shotPoint;
 
     //States
     public float sightRange, attackRange;
@@ -34,12 +35,9 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Model_Unity_Ver1").transform; // player must be same as what's in here to work correctly
+        player = GameObject.Find("Model_Unity_Ver1").transform; // player must be called "Player" in order to work as intended
         agent = GetComponent<NavMeshAgent>();
 
-        //get enemy attack script
-        gruntScript = GetComponent<Grunt>();
-        bursterScript = GetComponent<Burster>();
     }
 
 
@@ -109,14 +107,18 @@ public class EnemyBehavior : MonoBehaviour
 
         transform.LookAt(player);
 
-        if (attacktype == 0) 
+        if (!alreadyAttacked)
         {
-            gruntScript.Fire();
+            Rigidbody rb = Instantiate(projectile, shotPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+
+            rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
-        else if (attacktype == 1)
-        {
-            bursterScript.Fire();
-        }
+    }
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
 
 
