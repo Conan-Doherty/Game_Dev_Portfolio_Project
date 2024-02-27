@@ -46,9 +46,12 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
         {
             if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)
             {
-                if(other.GetComponent<PlayerBehaviour>().)
-                GameManager.gameManager.itemscollected.removekey();
-                StartCoroutine(open());
+                if(other.GetComponent<PlayerBehaviour>().isinteracting == true)
+                {
+                    GameManager.gameManager.itemscollected.removekey();
+                    StartCoroutine(open());
+                }
+                
 
 
             }
