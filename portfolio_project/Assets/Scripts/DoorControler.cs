@@ -16,6 +16,8 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     [SerializeField]
     float openclosedelay = 1.75f;
     public bool islocked;
+    public bool isuniquelock;
+    public GameObject uniquekey;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,16 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
                 
 
 
+            }
+        }
+        else if (isuniquelock)
+        {
+            if (!uniquekey)
+            {
+                
+                
+                    StartCoroutine(open());
+                
             }
         }
         else

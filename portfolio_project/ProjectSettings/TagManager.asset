@@ -9,6 +9,8 @@ TagManager:
   - enemy
   - projectile
   - key
+  - virtual camera
+  - uniquekey
   layers:
   - Default
   - TransparentFX

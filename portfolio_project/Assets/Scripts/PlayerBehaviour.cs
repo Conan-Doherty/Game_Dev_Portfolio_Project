@@ -36,10 +36,15 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     int Dashamount = 3;
     Animator animator;
     bool canparry = true;
+    public Cinemachine.CinemachineVirtualCamera vcam;
+    public Transform target;
    // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()//grabs/creates instances on start
     {
+        target = this.gameObject.transform;
+        vcam.LookAt = target;
+        vcam.Follow = target;
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
@@ -273,14 +278,31 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         }
         
     }
+    IEnumerator camerapan(GameObject other)
+    {
+        Debug.Log("works");
+        target = other.gameObject.transform;
+        vcam.LookAt = target;
+        vcam.Follow = target;
+        yield return new WaitForSeconds(6);
+        target = this.gameObject.transform;
+        vcam.LookAt = target;
+        vcam.Follow= target;
+    }
     //same as above comment
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("key"))
         {
             Debug.Log("works");
+
             playerpickupkey();
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("uniquekey"))
+        {
+            Destroy(other.gameObject);
+            StartCoroutine(camerapan(other.gameObject));
         }
     }
 }
