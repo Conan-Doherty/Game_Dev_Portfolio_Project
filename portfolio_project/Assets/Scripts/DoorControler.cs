@@ -48,11 +48,11 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
         {
             if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)
             {
-                if(other.GetComponent<PlayerBehaviour>().isinteracting == true)
-                {
+                
+                
                     GameManager.gameManager.itemscollected.removekey();
                     StartCoroutine(open());
-                }
+                
                 
 
 
@@ -86,7 +86,11 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
             StartCoroutine(close());
         }
     }
-    IEnumerator open()//times the opening
+    public void opening()
+    {
+        StartCoroutine(open());
+    }
+    public IEnumerator open()//times the opening
     {
         isopening= true;
         yield return new WaitForSeconds(openclosedelay);

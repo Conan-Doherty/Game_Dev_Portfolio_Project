@@ -20,14 +20,14 @@ public class SceneChanger : MonoBehaviour // this script changes the level upon 
     }
     IEnumerator camerapan()// this enumerator will be used to control camera changes 
     {
-        Debug.Log("works");
+        Debug.Log("Chongle");
         target = this.gameObject.transform;
         vcam.LookAt = target;
         vcam.Follow = target;
         yield return new WaitForSeconds(6);
         SceneManager.LoadScene(Level);
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

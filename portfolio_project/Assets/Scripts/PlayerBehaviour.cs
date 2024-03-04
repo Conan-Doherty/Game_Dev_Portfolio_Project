@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour//main player control script
@@ -289,7 +290,9 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     IEnumerator camerapan(GameObject other)// this enumerator will be used to control camera changes 
     {
         Debug.Log("works");
-        target = other.gameObject.transform;
+        target = other.gameObject.transform.parent;
+        DoorControler control = other.gameObject.GetComponentInParent<DoorControler>();
+        control.opening();
         vcam.LookAt = target;
         vcam.Follow = target;
         yield return new WaitForSeconds(6);
@@ -303,7 +306,13 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         if (other.gameObject.CompareTag("key"))
         {
             Debug.Log("works");
-
+            
+            playerpickupkey();
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("2key"))
+        {
+            playerpickupkey();
             playerpickupkey();
             Destroy(other.gameObject);
         }
