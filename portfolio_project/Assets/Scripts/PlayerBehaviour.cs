@@ -254,7 +254,15 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         }
         if (other.gameObject.CompareTag("projectile"))
         {
-            PlayerTakeDmg(25);
+            if (isparrying)
+            {
+
+            }
+            else
+            {
+                PlayerTakeDmg(25);
+            }
+           
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("ammo"))
