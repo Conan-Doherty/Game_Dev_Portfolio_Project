@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sectionculler : MonoBehaviour // prototype script
+public class sectionculler : MonoBehaviour // prototype script that didnt end up being used
 {
     public GameObject first;
     public GameObject second;

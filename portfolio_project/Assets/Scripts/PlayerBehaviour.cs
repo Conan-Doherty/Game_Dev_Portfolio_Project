@@ -278,7 +278,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         }
         
     }
-    IEnumerator camerapan(GameObject other)
+    IEnumerator camerapan(GameObject other)// this enumerator will be used to control camera changes 
     {
         Debug.Log("works");
         target = other.gameObject.transform;
@@ -289,7 +289,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         vcam.LookAt = target;
         vcam.Follow= target;
     }
-    //same as above comment
+    //same as above comment but with a trigger collider
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("key"))
