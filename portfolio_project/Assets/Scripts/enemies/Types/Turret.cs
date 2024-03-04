@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    EnemyGetter stats;
+    public EnemyGetter stats;
     public Transform playerLocation;
 
     private bool alreadyAttacked = false; // important for fire rate
@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
 
     void Start()
     {
-        EnemyGetter stats = new EnemyGetter(2); // input choice for switch case
+        stats = new EnemyGetter(2); // input choice for switch case
 
         playerLocation = GameObject.Find("Model_Unity_Ver1").transform;
 
@@ -26,7 +26,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, stats.whatIsPlayer); // check for player inside attack distance of unit
+        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, 3); // check for player inside attack distance of unit
         if (InSightRange) AttackPlayer(); // set unit to fire at player
     }
 

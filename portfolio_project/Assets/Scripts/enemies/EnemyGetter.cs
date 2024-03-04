@@ -37,16 +37,16 @@ public class EnemyGetter // Script Purpose: To have all of the stats of the enem
         switch (Choice)
         {
             case 0: //Grunt
-                walkSpeed = 11;
-                attackSpeed = 2;
-                bulletSpeed = 10;
-                sightRange = 8;
-                willChase = true;
+                walkSpeed = 11; // speed that the enemy will walk at
+                attackSpeed = 2; // amount of time between shots (seconds)
+                bulletSpeed = 10; // speed of bullet
+                sightRange = 8; // range of sight line cone (for sniper it's the range the player needs to be within for it to run away)
+                willChase = true; // declares if the enemy can move or not
                 break;
 
             case 1: //Burster
                 walkSpeed = 9;
-                attackSpeed = 5;
+                attackSpeed = 1;
                 bulletSpeed = 8;
                 sightRange = 10;
                 willChase = true;
@@ -54,7 +54,7 @@ public class EnemyGetter // Script Purpose: To have all of the stats of the enem
 
             case 2: //Turret
                 walkSpeed = 0;
-                attackSpeed = 4;
+                attackSpeed = 1;
                 bulletSpeed = 15;
                 sightRange = 15;
                 willChase = false;
@@ -62,9 +62,9 @@ public class EnemyGetter // Script Purpose: To have all of the stats of the enem
 
             case 3: //Sniper
                 walkSpeed = 5;
-                attackSpeed = 1;
+                attackSpeed = 15;
                 bulletSpeed = 10;
-                sightRange = 30;
+                sightRange = 15;
                 willChase = true;
                 break;
 

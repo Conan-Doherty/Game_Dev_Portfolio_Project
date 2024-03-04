@@ -9,6 +9,7 @@ public class Sniper : MonoBehaviour
 
     public EnemyGetter EnemyGetter;
     public Transform playerLocation;
+    public Animator anim;
 
     public NavMeshAgent agent; // This is for pathfinding
 
@@ -35,23 +36,27 @@ public class Sniper : MonoBehaviour
     {
         InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, 3); // check for player inside view distance of unit
 
-        Vector3 pDir = (playerLocation.position - transform.position).normalized;
+        Vector3 pDir = (playerLocation.position - (transform.position)).normalized;
 
-        pDir = Quaternion.AngleAxis(45, Vector3.up) * pDir;
-        if (InSightRange) RunAway(transform.position - (pDir * (stats.sightRange + 5))); // set unit to pathfind away from player until within attack range
-        else Fire();
+        if (InSightRange) RunAway(transform.position - (pDir * (stats.sightRange))); // set unit to pathfind away from player until within attack range
+        else
+        {
+            anim.speed = 0;
+        }
+        Fire();
     }
 
 
     private void RunAway(Vector3 pos)
     {
         agent.SetDestination(pos);
+        anim.speed = 1;
     }
 
     public void Fire()
     {
         transform.LookAt(playerLocation);
-
+        
         if (!alreadyAttacked)
         {
             Rigidbody rb = Instantiate(projectile, shotPoint.position, Quaternion.identity).GetComponent<Rigidbody>();

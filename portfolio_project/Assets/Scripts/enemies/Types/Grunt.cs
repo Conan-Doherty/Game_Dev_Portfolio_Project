@@ -38,25 +38,25 @@ public class Grunt : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
         InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, 3); // check for player inside view distance of unit
-   
-        if (InSightRange) ChasePlayer(); // set unit to pathfind to player until within attack range
+
+        if (InSightRange)
+        {
+            ChasePlayer();
+            anim.speed = 1;
+        } // set unit to pathfind to player until within attack range
         else
         {
-            isFiring = false;
-            isWalking = false;
-        }
-
-        if (isWalking) anim.Play("walking");
-        if (isFiring) anim.Play("enemyFiring");
-        if (!isWalking && !isFiring) anim.Play("idle");
+            anim.speed = 0;
+        }      
     }
 
 
     private void ChasePlayer()
     {
-        isWalking = true;
 
+        
         agent.SetDestination(playerLocation.position);
 
         transform.LookAt(playerLocation);
@@ -66,7 +66,7 @@ public class Grunt : MonoBehaviour
 
     public void Fire()
     {
-        isFiring = true;
+        
         if (!alreadyAttacked)
         {
             Rigidbody rb = Instantiate(projectile, shotPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
