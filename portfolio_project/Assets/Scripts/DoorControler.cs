@@ -18,6 +18,7 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     public bool islocked;
     public bool isuniquelock;
     public GameObject uniquekey;
+    public bool isopen = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +49,14 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
         {
             if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)
             {
-                
-                
+
+                if (!isopen)
+                {
                     GameManager.gameManager.itemscollected.removekey();
+
                     StartCoroutine(open());
-                
+                    isopen = true;
+                }
                 
 
 
@@ -62,19 +66,23 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
         {
             if (!uniquekey)
             {
-                
-                
+
+                if (!isopen)
+                {
                     StartCoroutine(open());
-                
+                    isopen = true;
+                }
             }
         }
         else
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                StartCoroutine(open());
-
-
+                if (!isopen)
+                {
+                    StartCoroutine(open());
+                    isopen = true;
+                }
             }
         }
     }
@@ -82,8 +90,10 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
-            StartCoroutine(close());
+            if (isopen)
+            {
+                StartCoroutine(close());
+            }
         }
     }
     public void opening()
