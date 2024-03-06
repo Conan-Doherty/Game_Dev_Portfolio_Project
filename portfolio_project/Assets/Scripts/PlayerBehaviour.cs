@@ -29,7 +29,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     [SerializeField]
     float parrydelay = 2f;
     float parrydelayelapsedtime = 0f;
-    bool isparrying = false;
+    public bool isparrying = false;
     public bool isinteracting = false;
     public GameObject parryuiobj;
     public HealthBar healthbar;
