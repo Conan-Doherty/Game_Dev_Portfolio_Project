@@ -22,6 +22,7 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Model_Unity_Ver1");
         cassetteScript = cassette.GetComponent<SenchoDamage>();
     }
 
@@ -37,7 +38,8 @@ public class BossController : MonoBehaviour
         {
             if (attackTimer <= 0.0f)
             {
-                switch (Random.Range(0, 1))
+                attacked = true;
+                switch (Random.Range(0, 2))
                 {
                     case 0:
                         SideAttack();
@@ -46,42 +48,43 @@ public class BossController : MonoBehaviour
                         DropAttack();
                         break;
                 }
-                attackTimer = 3f;
-                attacked = true;
+                attackTimer = 10f;
+                
             }
         }
 
 
 
     }
-    public void ResetTimer()
-    {
-        attackTimer = 10f;
-    }
     public void SideAttack()
     {
+        attackTimer = 10f;
         if (side) // every time a side attack is made, it swaps sides
         {
             side = false;
-            dropPoint.transform.position = new Vector3(14.44f, 0.625f, player.transform.position.z); // make laser line up with player
-            dropPoint.transform.eulerAngles = new Vector3(0f, 0f, 270f); // rotate depending on wall
+            dropPoint.transform.position = new Vector3(67.06f, 11.62f, player.transform.position.z); // make laser line up with player
+            dropPoint.transform.eulerAngles = new Vector3(0f, 0f, 0f); // rotate depending on wall
+            Instantiate(laser, dropPoint.transform);
         }
         else
         {
             side = true;
-            dropPoint.transform.position = new Vector3(-14.469f, 0.625f, player.transform.position.z); // make laser line up with player
-            dropPoint.transform.eulerAngles = new Vector3(0f, 0f, 90f); // rotate depending on wall
+            dropPoint.transform.position = new Vector3(95.85f, 11.62f, player.transform.position.z); // make laser line up with player
+            dropPoint.transform.eulerAngles = new Vector3(0f, 0f, 180f); // rotate depending on wall
+            Instantiate(laser, dropPoint.transform);
         }
-        Instantiate(laser, dropPoint.transform);
+        
+        Debug.Log("side attack");
+
     }
     public void DropAttack()
     {
-
-        dropPoint.transform.position = new Vector3(player.transform.position.x, 8f, player.transform.position.z); // drop key on player because funny
-        dropPoint.transform.eulerAngles = new Vector3(0f, 0f, 90f); // this is just incase the sideattack changes anything
+        attackTimer = 10f;
+        dropPoint.transform.position = new Vector3(player.transform.position.x, 19.4f, player.transform.position.z); // drop key on player because funny
+        dropPoint.transform.eulerAngles = new Vector3(0f, 0f, 0f); // this is just incase the sideattack changes anything
 
         Instantiate(key, dropPoint.transform);
-
+        Debug.Log("drop attack");
         
     }
     public void DamageRotation()
