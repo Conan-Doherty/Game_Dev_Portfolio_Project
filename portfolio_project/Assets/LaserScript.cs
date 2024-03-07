@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
-    public Vector3 InPosition;
-    public Vector3 OutPosition;
 
     public PlayerBehaviour player;
     public BossController bossManScript;
 
     [SerializeField] bool attacked;
+    [SerializeField] GameObject laser;
 
-    private Ray ray;
-    private RaycastHit hit;
+    bool inside = false;
     [SerializeField] float attackTimer = 2f;
     [SerializeField] float returnTimer = 5f;
     [SerializeField] Transform shotPoint;
@@ -26,35 +24,38 @@ public class LaserScript : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        ray = new Ray(shotPoint.position, transform.forward);
-    }
     void Update()
     {
         attackTimer -= Time.deltaTime;
-        if (attacked == true)
-        {
-            returnTimer -= Time.deltaTime;
-            if (returnTimer <= 0)
-            {
 
-            }
-        }
-        else if (attackTimer <= 0f && Physics.Raycast(ray, out hit))
+        if (attackTimer <= 0f && !attacked)
         {
-            if (hit.collider.gameObject.CompareTag("Player"))
+             if (bossManScript.side)
             {
-                if (player.isparrying)
+                Instantiate(laser, transform.position, Quaternion.Euler(0f, 270f, 0f));
+            }
+            else
+            {
+                Instantiate(laser, transform.position, Quaternion.Euler(0f, 90f, 0f));
+            }
+            
+
+            if (player.isparrying)
                 {
+                    Debug.Log("deflected laser");
                     DestroyLaser(1); // move to "DestroyLaser" function
                 }
-                else
-                {
-                    player.PlayerTakeDmg(10); // directly calls the damage function within PlayerBehaviour
-                }
-            }
+            Debug.Log("laser hit");
+
             attacked = true;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.CompareTag("Player")) // wanted the player to have an extra option to trigger damage phase if they don't know they can deflect or aren't used to it
+        {
+            DestroyLaser(1);
         }
     }
     void DestroyLaser(int method) // Destroys the laser and opens the boss up to a counter attack
@@ -71,11 +72,11 @@ public class LaserScript : MonoBehaviour
         
         
     }
-    private void OnTriggerEnter(Collider other)
+
+    void OnDrawGizmosSelected()
     {
-        if (other.CompareTag("Sword"))
-        {
-            DestroyLaser(1);
-        }
+        Gizmos.color = Color.red;
+        Vector3 direction = transform.TransformDirection(Vector3.right) * 5;
+        Gizmos.DrawRay(transform.position, direction);
     }
 }

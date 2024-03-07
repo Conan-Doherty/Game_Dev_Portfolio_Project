@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5925666300910897376}
   - component: {fileID: 96939083290868389}
+  - component: {fileID: 8618986079862260928}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -129,14 +130,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a898442f71857349bb0abc25a3019e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InPosition: {x: 0, y: 0, z: 0}
-  OutPosition: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   bossManScript: {fileID: 0}
   attacked: 0
+  laser: {fileID: 2935690699395158419, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7, type: 3}
   attackTimer: 10
   returnTimer: 5
   shotPoint: {fileID: 3891917506699337889}
+--- !u!65 &8618986079862260928
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182188820103338258}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.631446, y: 2.0038266, z: 1.9790913}
+  m_Center: {x: 0.1274001, y: -0.032980442, z: 0.019794762}
 --- !u!1 &8103696459840665546
 GameObject:
   m_ObjectHideFlags: 0

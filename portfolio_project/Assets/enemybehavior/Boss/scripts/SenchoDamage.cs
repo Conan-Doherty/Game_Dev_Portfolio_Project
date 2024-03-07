@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class SenchoDamage : MonoBehaviour
 {
-    public Vector3 InPosition; // position where the cassette (weakpoint) is not visible and will ignore damage
-    public Vector3 OutPosition; // position where the cassette (weakpoint) is visible and will take damage
     public bool damagable; // decides whether or not the player can damage the cassette (weakpoint)
 
     public BossController mainScript;
+
+    bool moving;
+    bool inside;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,21 +22,40 @@ public class SenchoDamage : MonoBehaviour
     void Update()
     {
         
+        if (moving && inside) 
+        {
+            transform.Translate(Vector3.left * Time.deltaTime);
+        }
+        else if (moving && !inside)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime);
+        }
+            
+        
     }
     public void DamagePhase()
     {
-        transform.position = OutPosition;
+        inside = false;
+        StartCoroutine(Open());
+        Debug.Log("damage phase");
         damagable = true;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (damagable == true && other.CompareTag("Sword"))
+        Debug.Log(other.tag);
+        if (damagable == true && other.CompareTag("Player"))
         {
             //set health here
-
-            damagable = false;
-            transform.position = InPosition;
             mainScript.damaged = true;
+            damagable = false;
+            inside = true;
+            StartCoroutine(Open());
         }
+    }
+    public IEnumerator Open()//times the opening
+    {
+        moving = true;
+        yield return new WaitForSeconds(2);
+        moving = false;
     }
 }

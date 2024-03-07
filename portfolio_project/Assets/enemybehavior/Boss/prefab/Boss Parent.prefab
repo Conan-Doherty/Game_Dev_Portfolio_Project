@@ -133,11 +133,17 @@ MonoBehaviour:
   damaged: 0
   stunned: 0
   attacked: 0
+  particleOne: {fileID: 6961976976282636501, guid: 7c0cd51cd77051642bcc5d0db57992af,
+    type: 3}
+  particleTwo: {fileID: 6851474900318431984, guid: 5dacb880a88e9cc4a8718f7364c1abe2,
+    type: 3}
   laser: {fileID: 4182188820103338258, guid: 3925f9efd7f1fed48b6fa3f877b4cc09, type: 3}
   key: {fileID: 0}
   player: {fileID: 0}
   dropPoint: {fileID: 0}
+  laserPoint: {fileID: 0}
   side: 0
+  damageTaken: 0
   attackTimer: 10
 --- !u!1 &3447622402290356319
 GameObject:
@@ -352,6 +358,7 @@ GameObject:
   - component: {fileID: 1406482335674088708}
   - component: {fileID: 1160442476834722261}
   - component: {fileID: 8904215844300811337}
+  - component: {fileID: 448349224770895086}
   m_Layer: 0
   m_Name: cassete
   m_TagString: Untagged
@@ -436,7 +443,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a57b1150f28190449243ceb01559131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InPosition: {x: 0.003585815, y: -1.85, z: -0.215}
-  OutPosition: {x: 0.003585815, y: -1.829984, z: -0.8373108}
   damagable: 0
-  mainScript: {fileID: 0}
+  mainScript: {fileID: 4295358866243939227}
+--- !u!65 &448349224770895086
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236543007595985812}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.649287, y: 1.129474, z: 8.088809}
+  m_Center: {x: 0, y: 0.0000038146973, z: 0}
