@@ -10,9 +10,10 @@ public class LaserScript : MonoBehaviour
 
     [SerializeField] bool attacked;
     [SerializeField] GameObject laser;
+    [SerializeField] GameObject funnyEffect;
 
     bool inside = false;
-    [SerializeField] float attackTimer = 2f;
+    [SerializeField] float attackTimer = 5f;
     [SerializeField] float returnTimer = 5f;
     [SerializeField] Transform shotPoint;
 
@@ -27,7 +28,14 @@ public class LaserScript : MonoBehaviour
     void Update()
     {
         attackTimer -= Time.deltaTime;
-
+        if (attackTimer <= 3f && attackTimer > 0f)
+        {
+            funnyEffect.SetActive(true);
+        }
+        else
+        {
+            funnyEffect.SetActive(false);
+        }
         if (attackTimer <= 0f && !attacked)
         {
              if (bossManScript.side)

@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour
     public Transform shotPoint; // where the bullet spawns
     public GameObject projectile; // The entire bullet
     public LayerMask playerlayer;
+    [SerializeField] GameObject death;
 
     public bool InSightRange = false; // for actions relating to being in sight range
     public bool InAttackRange = false; // same as above but for attack range
@@ -66,6 +67,7 @@ public class Turret : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        Instantiate(death);
+        this.gameObject.SetActive(false);
     }
 }

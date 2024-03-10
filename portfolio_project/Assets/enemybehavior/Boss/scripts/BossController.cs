@@ -14,6 +14,7 @@ public class BossController : MonoBehaviour
     [SerializeField] GameObject particleOne;
     [SerializeField] GameObject particleTwo;
     [SerializeField] GameObject dead;
+    [SerializeField] GameObject blue;
 
     [SerializeField] GameObject face;
 
@@ -125,6 +126,7 @@ public class BossController : MonoBehaviour
             case 3:
                 // insert escape stuff here
                 dead.SetActive(true);
+                blue.SetActive(true);
                 Debug.Log("boss dead");
                 break;
         }

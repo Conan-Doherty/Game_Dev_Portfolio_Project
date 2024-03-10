@@ -15,6 +15,7 @@ public class Grunt : MonoBehaviour
     public EnemyGetter EnemyGetter;
     public GameObject player;
     [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject death;
 
     public NavMeshAgent agent; // This is for pathfinding
 
@@ -99,6 +100,7 @@ public class Grunt : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        Instantiate(death);
         this.gameObject.SetActive(false);
     }
 }

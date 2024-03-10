@@ -15,6 +15,7 @@ public class Sniper : MonoBehaviour
 
     private bool alreadyAttacked = false; // important for fire rate
 
+    [SerializeField] GameObject death;
     public Transform shotPoint; // where the bullet spawns
     public GameObject projectile; // The entire bullet
     public LayerMask playerlayer;
@@ -87,6 +88,7 @@ public class Sniper : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        Instantiate(death);
+        this.gameObject.SetActive(false);
     }
 }
