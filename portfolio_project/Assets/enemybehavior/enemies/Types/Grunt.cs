@@ -13,7 +13,7 @@ public class Grunt : MonoBehaviour
     [Header ("choice 0 = grunt, 1 = burster")]
     public int choice;
     public EnemyGetter EnemyGetter;
-    public Transform playerLocation;
+    public GameObject player;
 
     public NavMeshAgent agent; // This is for pathfinding
 
@@ -22,29 +22,32 @@ public class Grunt : MonoBehaviour
     public Transform shotPoint; // where the bullet spawns
     public GameObject projectile; // The entire bullet
 
-    public bool InSightRange; // for actions relating to being in sight range
-    public bool InAttackRange; // same as above but for attack range
-
+    public bool InSightRange = false; // for actions relating to being in sight range
+    public bool InAttackRange = false; // same as above but for attack range
+    public LayerMask playerlayer;
     public EnemyGetter stats; // input choice for switch case in EnemyGetter
     private void Awake()
     {
         stats = new EnemyGetter(choice);
-        playerLocation = GameObject.Find("Model_Unity_Ver1").transform;
+        player = GameObject.Find("Model_Unity_Ver1");
         agent = GetComponent<NavMeshAgent>();
         agent.speed = stats.walkSpeed;
+       
 
     }
-
+    public void FixedUpdate()
+    {
+        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, playerlayer); // check for player inside view distance of unit
+    }
     // Update is called once per frame
     private void Update()
     {
-        
-        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, 3); // check for player inside view distance of unit
-
         if (InSightRange)
         {
+            
             ChasePlayer();
             anim.speed = 1;
+            
         } // set unit to pathfind to player until within attack range
         else
         {
@@ -57,9 +60,9 @@ public class Grunt : MonoBehaviour
     {
 
         
-        agent.SetDestination(playerLocation.position);
+        agent.SetDestination(player.transform.position);
 
-        transform.LookAt(playerLocation);
+        transform.LookAt(player.transform);
 
         Fire();
     }

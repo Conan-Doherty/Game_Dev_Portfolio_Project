@@ -1437,13 +1437,16 @@ MonoBehaviour:
   isWalking: 0
   isFiring: 0
   choice: 0
-  playerLocation: {fileID: 0}
+  player: {fileID: 0}
   agent: {fileID: 6237427315125244531}
   shotPoint: {fileID: 1578685621322095378}
   projectile: {fileID: 348705955578551721, guid: 042dd4a932dc6fa49ba502c250cfa67e,
     type: 3}
   InSightRange: 0
   InAttackRange: 0
+  playerlayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &4821216863778207092
 MonoBehaviour:
   m_ObjectHideFlags: 0
