@@ -10,13 +10,14 @@ public class Sniper : MonoBehaviour
     public EnemyGetter EnemyGetter;
     public Transform playerLocation;
     public Animator anim;
-
+    [SerializeField] Rigidbody rb;
     public NavMeshAgent agent; // This is for pathfinding
 
     private bool alreadyAttacked = false; // important for fire rate
 
     public Transform shotPoint; // where the bullet spawns
     public GameObject projectile; // The entire bullet
+    public LayerMask playerlayer;
 
     public bool InSightRange; // for actions relating to being in sight range
     public bool InAttackRange; // same as above but for attack range
@@ -34,11 +35,16 @@ public class Sniper : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, 3); // check for player inside view distance of unit
+        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, playerlayer); // check for player inside view distance of unit
 
         Vector3 pDir = (playerLocation.position - (transform.position)).normalized;
 
         if (InSightRange) RunAway(transform.position - (pDir * (stats.sightRange))); // set unit to pathfind away from player until within attack range
+        // this is just a quick animation set up to make up for problems with the old models. (future me, write down magnitude because I know you'll forget)
+        if (rb.velocity.magnitude > 0)
+        {
+            anim.speed = 1;
+        }
         else
         {
             anim.speed = 0;

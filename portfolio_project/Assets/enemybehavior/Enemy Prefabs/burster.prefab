@@ -2881,20 +2881,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5189948625057681230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2fff445565176458023bb659b24ce8, type: 3}
+  m_Script: {fileID: 11500000, guid: c74e5f59a689486448511aa76b53583d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 5111402398569840311}
   isWalking: 0
   isFiring: 0
   choice: 1
-  playerLocation: {fileID: 0}
+  player: {fileID: 0}
   agent: {fileID: 1823343483113426980}
   shotPoint: {fileID: 8185886276767528112}
   projectile: {fileID: 348705955578551721, guid: ec1b2d4cb146b0e418291caa4a0f5956,
     type: 3}
   InSightRange: 0
   InAttackRange: 0
+  playerlayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5070009446656742547
 MonoBehaviour:
   m_ObjectHideFlags: 0

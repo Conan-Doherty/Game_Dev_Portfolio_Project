@@ -11,6 +11,7 @@ public class Turret : MonoBehaviour
 
     public Transform shotPoint; // where the bullet spawns
     public GameObject projectile; // The entire bullet
+    public LayerMask playerlayer;
 
     public bool InSightRange = false; // for actions relating to being in sight range
     public bool InAttackRange = false; // same as above but for attack range
@@ -26,7 +27,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, 3); // check for player inside attack distance of unit
+        InSightRange = Physics.CheckSphere(transform.position, stats.sightRange, playerlayer); // check for player inside attack distance of unit
         if (InSightRange) AttackPlayer(); // set unit to fire at player
     }
 

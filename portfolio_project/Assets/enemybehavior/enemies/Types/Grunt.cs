@@ -14,6 +14,7 @@ public class Grunt : MonoBehaviour
     public int choice;
     public EnemyGetter EnemyGetter;
     public GameObject player;
+    [SerializeField] Rigidbody rb;
 
     public NavMeshAgent agent; // This is for pathfinding
 
@@ -44,15 +45,17 @@ public class Grunt : MonoBehaviour
     {
         if (InSightRange)
         {
-            
             ChasePlayer();
-            anim.speed = 1;
-            
         } // set unit to pathfind to player until within attack range
+        // this is just a quick animation set up to make up for problems with the old models. (future me, write down magnitude because I know you'll forget)
+        if (rb.velocity.magnitude > 0) 
+        {
+            anim.speed = 1;
+        }
         else
         {
             anim.speed = 0;
-        }      
+        }
     }
 
 

@@ -2941,5 +2941,8 @@ MonoBehaviour:
   shotPoint: {fileID: 815170021763605947}
   projectile: {fileID: 348705955578551721, guid: ec1b2d4cb146b0e418291caa4a0f5956,
     type: 3}
+  playerlayer:
+    serializedVersion: 2
+    m_Bits: 8
   InSightRange: 0
   InAttackRange: 0
