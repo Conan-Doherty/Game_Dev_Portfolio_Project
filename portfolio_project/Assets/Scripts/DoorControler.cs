@@ -19,6 +19,7 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     public bool isuniquelock;
     public GameObject uniquekey;
     public bool isopen = false;
+    public bool isdefended = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +74,11 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
                     isopen = true;
                 }
             }
+        }
+        else if (isdefended) 
+        {
+            isopening= false;
+            
         }
         else
         {

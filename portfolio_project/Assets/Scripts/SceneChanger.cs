@@ -28,7 +28,7 @@ public class SceneChanger : MonoBehaviour // this script changes the level upon 
         target = this.gameObject.transform;
         vcam.LookAt = target;
         vcam.Follow = target;
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(Level);
     }
     private void OnTriggerEnter(Collider other)

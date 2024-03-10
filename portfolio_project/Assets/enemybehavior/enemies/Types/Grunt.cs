@@ -91,6 +91,6 @@ public class Grunt : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 }

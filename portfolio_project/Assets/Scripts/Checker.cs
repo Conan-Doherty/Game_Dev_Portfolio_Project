@@ -6,20 +6,21 @@ public class Checker : MonoBehaviour
 {
     // Start is called before the first frame update
     // Start is called before the first frame update
-    public NavMeshAgent[] children;
+    public GameObject[] children;
     public DoorControler enemydoor;
     void Start()
     {
-        gameObject.GetComponentsInChildren<NavMeshAgent>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (children.Length <= 0)
+        if (!children[0].gameObject.activeSelf)
         {
-            enemydoor.open();
+            enemydoor.isdefended = false;
+            enemydoor.opening();
         }
     }
 }

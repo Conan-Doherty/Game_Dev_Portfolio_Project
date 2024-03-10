@@ -11,6 +11,7 @@ TagManager:
   - key
   - virtual camera
   - uniquekey
+  - 2key
   layers:
   - Default
   - TransparentFX

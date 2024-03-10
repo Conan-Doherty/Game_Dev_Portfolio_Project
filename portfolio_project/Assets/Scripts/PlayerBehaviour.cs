@@ -39,10 +39,14 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     bool canparry = true;
     public Cinemachine.CinemachineVirtualCamera vcam;
     public Transform target;
-   // public AudioSource pickup;
+    public GameObject swordobj;
+    Collider swordcol;
+    // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()//grabs/creates instances on start
     {
+        swordcol = swordobj.GetComponent<Collider>();
+        swordcol.enabled = false;
         target = this.gameObject.transform;
         vcam.LookAt = target;
         vcam.Follow = target;
@@ -145,6 +149,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     IEnumerator Attackfinisher()
     {
         yield return new WaitForSeconds(1f);
+        swordcol.enabled = false;
         animator.SetBool("IsAttacking", false);
         Speed = 4f;
     }
@@ -162,6 +167,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     {
         Debug.Log("Attack");
         animator.SetBool("IsAttacking", true);
+        swordcol.enabled= true;
         Speed = 0f;
         StartCoroutine(Attackfinisher());
     }
@@ -295,7 +301,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         control.opening();
         vcam.LookAt = target;
         vcam.Follow = target;
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(2);
         target = this.gameObject.transform;
         vcam.LookAt = target;
         vcam.Follow= target;
