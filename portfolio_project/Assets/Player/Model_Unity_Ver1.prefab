@@ -139,8 +139,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.081165045, y: 1.2737851, z: 0.11785473}
-  m_Center: {x: -0.00000058032356, y: -0.4260366, z: 0.013855554}
+  m_Size: {x: 0.081165045, y: 1.5782152, z: 0.24088275}
+  m_Center: {x: -0.0000005172787, y: -0.57825184, z: 0.069375135}
 --- !u!1001 &7253957863781970269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d3cbb195320e64e8cacd299fdc86bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
+  Speed: 10
   currentSpeed: 0
   Movement: {fileID: 3952252694269628915, guid: aa436c5d713b6a94da84d8fe43214f4a,
     type: 3}
@@ -748,6 +748,7 @@ MonoBehaviour:
   shurikenthrowdelay: 1
   throwpoint: {fileID: 3737345530689009854}
   parrydelay: 2
+  isparrying: 0
   isinteracting: 0
   parryuiobj: {fileID: 0}
   healthbar: {fileID: 0}

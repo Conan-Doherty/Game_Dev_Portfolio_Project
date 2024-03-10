@@ -100,7 +100,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     }
     void OnDash()//alters speed if player is dashing and is able to
     {
-        if (Dashamount > 0 && Speed == 4f)
+        if (Dashamount > 0 && Speed == 6f)
         {
             animator.SetBool("Ismoving", true);
             animator.SetBool("IsDashing", true);
@@ -137,7 +137,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     IEnumerator resetspeed()
     {
         yield return new WaitForSeconds(0.5f);
-        Speed = 4f;
+        Speed = 6f;
         animator.SetBool("IsDashing", false);
     }
     IEnumerator dashregen()
@@ -151,13 +151,13 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         yield return new WaitForSeconds(1f);
         swordcol.enabled = false;
         animator.SetBool("IsAttacking", false);
-        Speed = 4f;
+        Speed = 6f;
     }
     IEnumerator ParryFinisher()
     {
         yield return new WaitForSeconds(1f);
         animator.SetBool("IsParrying", false);
-        Speed = 4f;
+        Speed = 6f;
         yield return new WaitForSeconds(parrydelay);
         parryuiobj.SetActive(true);
         canparry = true;
@@ -267,7 +267,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
             }
             else
             {
-                PlayerTakeDmg(25);
+                PlayerTakeDmg(5);
             }
            
             Destroy(other.gameObject);
