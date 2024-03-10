@@ -11,12 +11,10 @@ public class GameManager : MonoBehaviour
     public GameObject deadmenu;
     public GameObject Winmenu;
     public GameObject player;
-    public ItemCollector itemscollected = new ItemCollector(0, 0, 0);
+    public ItemCollector itemscollected = new ItemCollector(0, 0, 0,3);
    // public TextMeshProUGUI score;
    // public TextMeshProUGUI Kills;
     //public TextMeshProUGUI treasurecollected;
-    //public TextMeshProUGUI score2;
-    //public TextMeshProUGUI Ammo;
     //public TextMeshProUGUI Keys;
     //public TextMeshProUGUI Timetaken;
     float completetime = 0f;
@@ -24,6 +22,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (PlayerPrefs.HasKey("kills"))
+        {
+            itemscollected._currentammo = PlayerPrefs.GetInt("ammo");
+            itemscollected._currentkeys = PlayerPrefs.GetInt("keys");
+            itemscollected._currentkills = PlayerPrefs.GetInt("kills");
+            itemscollected._currenttreasure = PlayerPrefs.GetInt("Treasure");
+        }
+        
         if (gameManager != null && gameManager != this)
         {
             Destroy(this);

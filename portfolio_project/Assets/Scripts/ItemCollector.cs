@@ -29,7 +29,7 @@ public class ItemCollector // script used for creating a instance of a item coll
         get { return _currentammo; }
         set { _currentammo = value; }
     }
-    public ItemCollector(int kills, int Treasure,int Keys)//constructor used to create instance in the game manager
+    public ItemCollector(int kills, int Treasure,int Keys,int Ammo)//constructor used to create instance in the game manager
     {
         _currentkills = kills;
         _currenttreasure = Treasure;
