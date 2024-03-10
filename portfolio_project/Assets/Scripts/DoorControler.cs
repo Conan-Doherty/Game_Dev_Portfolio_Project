@@ -104,6 +104,7 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     {
         isopening= true;
         yield return new WaitForSeconds(openclosedelay);
+        isopen = true;
         isopening= false;
     }
     IEnumerator close()//times the closing
