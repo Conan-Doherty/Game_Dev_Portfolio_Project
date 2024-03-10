@@ -43,7 +43,7 @@ public class SenchoDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
-        if (damagable == true && other.CompareTag("Player"))
+        if (damagable == true && other.CompareTag("Sword"))
         {
             //set health here
             mainScript.damaged = true;

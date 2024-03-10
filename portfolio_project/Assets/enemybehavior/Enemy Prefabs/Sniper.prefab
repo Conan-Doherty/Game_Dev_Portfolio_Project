@@ -2937,6 +2937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLocation: {fileID: 0}
   anim: {fileID: 1139722387555131808}
+  rb: {fileID: 1724397349176437955}
   agent: {fileID: 6680722246398621011}
   shotPoint: {fileID: 815170021763605947}
   projectile: {fileID: 348705955578551721, guid: ec1b2d4cb146b0e418291caa4a0f5956,

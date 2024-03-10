@@ -2889,6 +2889,7 @@ MonoBehaviour:
   isFiring: 0
   choice: 1
   player: {fileID: 0}
+  rb: {fileID: 6645971645359795884}
   agent: {fileID: 1823343483113426980}
   shotPoint: {fileID: 8185886276767528112}
   projectile: {fileID: 348705955578551721, guid: ec1b2d4cb146b0e418291caa4a0f5956,

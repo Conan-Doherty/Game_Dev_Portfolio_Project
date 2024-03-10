@@ -41,7 +41,7 @@ public class Sniper : MonoBehaviour
 
         if (InSightRange) RunAway(transform.position - (pDir * (stats.sightRange))); // set unit to pathfind away from player until within attack range
         // this is just a quick animation set up to make up for problems with the old models. (future me, write down magnitude because I know you'll forget)
-        if (rb.velocity.magnitude > 0)
+        if (agent.velocity.magnitude > 0)
         {
             anim.speed = 1;
         }

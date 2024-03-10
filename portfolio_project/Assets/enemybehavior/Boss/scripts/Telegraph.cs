@@ -13,7 +13,7 @@ public class Telegraph : MonoBehaviour
         
         key = prefabList[Random.Range(0, 5)];
 
-        Instantiate(key, transform.position, Quaternion.identity);
+        Instantiate(key, transform.position, Quaternion.Euler(-70f, 0f, 0f));
         
     }
     private void Update()

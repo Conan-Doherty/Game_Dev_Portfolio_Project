@@ -53,7 +53,7 @@ public class LaserScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
-        if (other.CompareTag("Player")) // wanted the player to have an extra option to trigger damage phase if they don't know they can deflect or aren't used to it
+        if (other.CompareTag("Sword")) // wanted the player to have an extra option to trigger damage phase if they don't know they can deflect or aren't used to it
         {
             DestroyLaser(1);
         }
