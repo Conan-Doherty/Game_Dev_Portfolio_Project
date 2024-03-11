@@ -27,6 +27,9 @@ public class BossController : MonoBehaviour
     [Header("escape doors")]
     public DoorControler d1;
     public DoorControler d2;
+    public DoorControler d3;
+    public DoorControler d4;
+    public DoorControler d5;
     [Header("camera stuff")]
    
     public CinemachineVirtualCamera vcam;

@@ -28,8 +28,10 @@ public class Grunt : MonoBehaviour
     public bool InAttackRange = false; // same as above but for attack range
     public LayerMask playerlayer;
     public EnemyGetter stats; // input choice for switch case in EnemyGetter
+    public Checker door;
     private void Awake()
     {
+        door = GetComponentInParent<Checker>();
         stats = new EnemyGetter(choice);
         player = GameObject.Find("Model_Unity_Ver1");
         agent = GetComponent<NavMeshAgent>();
@@ -101,6 +103,13 @@ public class Grunt : MonoBehaviour
     private void DestroyEnemy()
     {
         Instantiate(death);
+        
         this.gameObject.SetActive(false);
+        
+        if (door != null)
+        {
+            door.deadcheck();
+        }
+
     }
 }
