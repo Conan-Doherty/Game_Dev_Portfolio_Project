@@ -16,7 +16,7 @@ public class Grunt : MonoBehaviour
     public GameObject player;
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject death;
-
+    
     public NavMeshAgent agent; // This is for pathfinding
 
     private bool alreadyAttacked = false; // important for fire rate
@@ -95,17 +95,18 @@ public class Grunt : MonoBehaviour
     {
         if (other.CompareTag("Sword"))
         {
-            Invoke(nameof(DestroyEnemy), 0.5f);
+            DestroyEnemy();
             Debug.Log("sword collided");
         }
     }
 
     private void DestroyEnemy()
     {
-        Instantiate(death);
+        //Instantiate(death);
         
         this.gameObject.SetActive(false);
-        
+        door.deadnumber++;
+        GameManager.gameManager.itemscollected.addkill();
         if (door != null)
         {
             door.deadcheck();

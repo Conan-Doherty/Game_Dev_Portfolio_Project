@@ -23,7 +23,6 @@ public class SceneChanger : MonoBehaviour // this script changes the level upon 
         PlayerPrefs.SetInt("kills", GameManager.gameManager.itemscollected.Kills);
         PlayerPrefs.SetInt("Treasure", GameManager.gameManager.itemscollected.Treasure);
         PlayerPrefs.SetInt("ammo", GameManager.gameManager.itemscollected.Ammo);
-        PlayerPrefs.SetInt("keys", GameManager.gameManager.itemscollected.Keys);
         Debug.Log("Chongle");
         target = this.gameObject.transform;
         vcam.LookAt = target;

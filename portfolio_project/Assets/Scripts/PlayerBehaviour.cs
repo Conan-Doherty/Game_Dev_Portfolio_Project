@@ -242,20 +242,11 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         healthbar.sethealth(GameManager.gameManager._PlayerHealth.Health);
        // pickup.PlayOneShot(pickup.clip, 0.5f);
     }
-    public void playerpickupkey()
-    {
-        GameManager.gameManager.itemscollected.addkey();
-    }
+    
     //below checks for collisions and if tag conditions are right will execute the code inside
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Laser"))
-        {
-            PlayerTakeDmg(10);
-            Playeraddkill();
-
-
-        }
+        
         if (other.gameObject.CompareTag("deadzone"))
         {
             PlayerTakeDmg(100);
@@ -310,19 +301,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     //same as above comment but with a trigger collider
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("key"))
-        {
-            Debug.Log("works");
-            
-            playerpickupkey();
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("2key"))
-        {
-            playerpickupkey();
-            playerpickupkey();
-            Destroy(other.gameObject);
-        }
+      
         if (other.gameObject.CompareTag("uniquekey"))
         {
             Destroy(other.gameObject);

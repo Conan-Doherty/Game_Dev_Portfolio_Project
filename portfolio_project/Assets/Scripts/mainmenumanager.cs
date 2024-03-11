@@ -16,9 +16,9 @@ public class mainmenumanager : MonoBehaviour
     {
         
     }
-    public void startgame()
+    public void startgame(int choice)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(choice);
     }
     public void leavegame()
     {

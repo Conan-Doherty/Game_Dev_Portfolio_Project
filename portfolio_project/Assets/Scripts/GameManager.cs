@@ -11,21 +11,20 @@ public class GameManager : MonoBehaviour
     public GameObject deadmenu;
     public GameObject Winmenu;
     public GameObject player;
-    public ItemCollector itemscollected = new ItemCollector(0, 0, 0,3);
-   // public TextMeshProUGUI score;
-   // public TextMeshProUGUI Kills;
-    //public TextMeshProUGUI treasurecollected;
-    //public TextMeshProUGUI Keys;
-    //public TextMeshProUGUI Timetaken;
+    public ItemCollector itemscollected = new ItemCollector(0, 0,3);
+    public TextMeshProUGUI score;
+  
+    
+    
+    
     float completetime = 0f;
-    public GameObject shuriken1, shuriken2, shuriken3,key;
+    public GameObject shuriken1, shuriken2, shuriken3;
     // Start is called before the first frame update
     void Awake()
     {
         if (PlayerPrefs.HasKey("kills"))
         {
             itemscollected._currentammo = PlayerPrefs.GetInt("ammo");
-            itemscollected._currentkeys = PlayerPrefs.GetInt("keys");
             itemscollected._currentkills = PlayerPrefs.GetInt("kills");
             itemscollected._currenttreasure = PlayerPrefs.GetInt("Treasure");
         }
@@ -55,28 +54,18 @@ public class GameManager : MonoBehaviour
             deadplayer();
         }
         shurikencounter();
-        keycounter();
-        /*Kills.text = "" + itemscollected._currentkills;
-        treasurecollected.text = "" + itemscollected._currenttreasure;
-        Keys.text = "" + itemscollected._currentkeys;
+        
+        
+        
+       
         score.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
-        score2.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
-        Ammo.text = "" + itemscollected._currentammo;
-        completetime += Time.deltaTime;
-        Timetaken.text = "" + completetime;
-        */
+        
+       
+        
+        
+        
     }
-    void keycounter()
-    {
-        if (itemscollected._currentkeys > 0)
-        {
-            key.SetActive(true);
-        }
-        else
-        {
-            key.SetActive(false);
-        }
-    }
+   
     void shurikencounter()
     {
         if (itemscollected._currentammo == 0)
@@ -141,10 +130,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pausemenu.SetActive(false);
     }
-    public void restartlevel()
+    public void restartlevel(int choice)
     {
         //string currentscene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(choice);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
 

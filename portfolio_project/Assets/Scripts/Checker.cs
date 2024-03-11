@@ -9,6 +9,7 @@ public class Checker : MonoBehaviour
     public GameObject[] children;
     public DoorControler enemydoor;
     bool alldead = false;
+    [SerializeField]
     int number;
     public int deadnumber = 0;
     void Start()
@@ -23,13 +24,7 @@ public class Checker : MonoBehaviour
     }
     public void deadcheck()
     {
-        for (int i = 0; i < children.Length; i++)
-        {
-            if (children[i].gameObject.activeSelf == false)
-            {
-                deadnumber++;
-            }
-        }
+       
         if (deadnumber >= number)
         {
             enemydoor.isdefended = false;

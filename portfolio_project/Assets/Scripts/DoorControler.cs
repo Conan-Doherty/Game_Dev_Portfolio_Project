@@ -33,12 +33,12 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
 
 
         //the following if statements check for player precense using the booleans and then open or close the doors as nessesary
-        if (isclosing)
+        if (isclosing && isopen)
         {
             door1.transform.Translate(Vector3.right*Time.deltaTime);
             door2.transform.Translate(Vector3.left * Time.deltaTime);
         }
-        if(isopening)
+        if(isopening && !isopen)
         {
             door1.transform.Translate(Vector3.left * Time.deltaTime);
             door2.transform.Translate(Vector3.right * Time.deltaTime);
@@ -47,25 +47,8 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     }
     void OnTriggerEnter(Collider other)// trigger detection checks for player keys if the door is set to locked but defaults to open if it isnt locked
     {
-        
-        if (islocked)
-        {
-            if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)
-            {
-
-                if (!isopen)
-                {
-                    GameManager.gameManager.itemscollected.removekey();
-
-                    StartCoroutine(open());
-                    isopen = true;
-                }
-                
-
-
-            }
-        }
-        else if (isuniquelock)
+       
+        if (isuniquelock)
         {
             if (!uniquekey)
             {
@@ -94,16 +77,7 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
             }
         }
     }
-    void OnTriggerExit(Collider other)//closes the door after player is outside the area of influence
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (isopen)
-            {
-                StartCoroutine(close());
-            }
-        }
-    }
+   
     public void opening()
     {
         StartCoroutine(open());
