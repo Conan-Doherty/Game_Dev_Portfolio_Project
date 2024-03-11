@@ -10,11 +10,11 @@ public class LaserScript : MonoBehaviour
 
     [SerializeField] bool attacked;
     [SerializeField] GameObject laser;
+    [SerializeField] destroyself laserScript;
     [SerializeField] GameObject funnyEffect;
 
-    bool inside = false;
     [SerializeField] float attackTimer = 5f;
-    [SerializeField] float returnTimer = 5f;
+    [SerializeField] float returnTimer = 0f;
     [SerializeField] Transform shotPoint;
 
     private void Awake()
@@ -27,8 +27,9 @@ public class LaserScript : MonoBehaviour
 
     void Update()
     {
+        returnTimer -= Time.deltaTime;
         attackTimer -= Time.deltaTime;
-        if (attackTimer <= 3f && attackTimer > 0f)
+        if (attackTimer <= 3f && attackTimer > 0f) // checks if the laser is about to fire to create telegraph
         {
             funnyEffect.SetActive(true);
         }
@@ -36,28 +37,24 @@ public class LaserScript : MonoBehaviour
         {
             funnyEffect.SetActive(false);
         }
-        if (attackTimer <= 0f && !attacked)
+        if (attackTimer <= 0f && !attacked) // checks if laser countdown is finished and fires laser
         {
-             if (bossManScript.side)
-            {
-                Instantiate(laser, transform.position, Quaternion.Euler(0f, 270f, 0f));
-            }
-            else
-            {
-                Instantiate(laser, transform.position, Quaternion.Euler(0f, 90f, 0f));
-            }
-            
+            laser.SetActive(true);
 
-            if (player.isparrying)
-                {
-                    Debug.Log("deflected laser");
-                    DestroyLaser(1); // move to "DestroyLaser" function
-                }
-            Debug.Log("laser hit");
-
+            returnTimer = 5f;
             attacked = true;
         }
+        if (laserScript.hit && player.isparrying) // checks if laser got parried
+        {
+            DestroyLaser(1);
+        }
+        if (returnTimer <= 0f && attacked == true) // destroys itself if the player takes too long
+        {
+            DestroyLaser(0);
+        }
+        
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
@@ -66,6 +63,7 @@ public class LaserScript : MonoBehaviour
             DestroyLaser(1);
         }
     }
+
     void DestroyLaser(int method) // Destroys the laser and opens the boss up to a counter attack
     {
         if(method == 1)

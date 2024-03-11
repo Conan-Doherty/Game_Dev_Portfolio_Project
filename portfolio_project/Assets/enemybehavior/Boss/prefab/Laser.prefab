@@ -4945,6 +4945,7 @@ Transform:
   - {fileID: 5966876504971243583}
   - {fileID: 3891917506699337889}
   - {fileID: 1813558806654490454}
+  - {fileID: 4431514744401088930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &96939083290868389
@@ -4962,10 +4963,11 @@ MonoBehaviour:
   player: {fileID: 0}
   bossManScript: {fileID: 0}
   attacked: 0
-  laser: {fileID: 2935690699395158419, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7, type: 3}
+  laser: {fileID: 1816943065799987593}
+  laserScript: {fileID: 3780136136197731805}
   funnyEffect: {fileID: 3901111656384748300}
   attackTimer: 5
-  returnTimer: 5
+  returnTimer: 0
   shotPoint: {fileID: 3891917506699337889}
 --- !u!65 &8618986079862260928
 BoxCollider:
@@ -5019,3 +5021,100 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5925666300910897376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3569875886411071514
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5925666300910897376}
+    m_Modifications:
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935690699395158419, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_Name
+      value: laserattack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935690699395158419, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7, type: 3}
+--- !u!1 &1816943065799987593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2935690699395158419, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3569875886411071514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3780136136197731805 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 432067378481542599, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3569875886411071514}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816943065799987593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ae7c345735e4f46af160303f1f4f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &4431514744401088930 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 933749367132459448, guid: 06d6e99e9bcdcf44bbd74e14020ea0d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3569875886411071514}
+  m_PrefabAsset: {fileID: 0}
