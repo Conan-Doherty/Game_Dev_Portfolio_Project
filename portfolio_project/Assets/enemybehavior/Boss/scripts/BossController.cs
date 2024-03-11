@@ -28,7 +28,7 @@ public class BossController : MonoBehaviour
     public DoorControler d1;
     public DoorControler d2;
     [Header("camera stuff")]
-    public Transform lookere;
+   
     public CinemachineVirtualCamera vcam;
     public bool side;
 
