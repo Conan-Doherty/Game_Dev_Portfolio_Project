@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,12 @@ public class BossController : MonoBehaviour
     public GameObject player;
     public GameObject dropPoint;
     public GameObject laserPoint;
-
+    [Header("escape doors")]
+    public DoorControler d1;
+    public DoorControler d2;
+    [Header("camera stuff")]
+    public Transform lookere;
+    public CinemachineVirtualCamera vcam;
     public bool side;
 
     [SerializeField] int damageTaken = 0;
@@ -128,7 +134,20 @@ public class BossController : MonoBehaviour
                 dead.SetActive(true);
                 blue.SetActive(true);
                 Debug.Log("boss dead");
+                d1.isdefended = false;
+                d2.isdefended = false;
+                d1.opening();
+                d2.opening();
+                StartCoroutine(camerapanning(1.2f));
                 break;
         }
+    }
+    IEnumerator camerapanning(float time)
+    {
+        vcam.LookAt = d1.transform;
+        vcam.Follow = d1.transform;
+        yield return new WaitForSeconds(time);
+        vcam.LookAt = player.transform;
+        vcam.Follow = player.transform;
     }
 }

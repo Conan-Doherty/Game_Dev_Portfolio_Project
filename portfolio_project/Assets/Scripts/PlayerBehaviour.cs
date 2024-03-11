@@ -41,6 +41,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     public Transform target;
     public GameObject swordobj;
     Collider swordcol;
+    
     // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()//grabs/creates instances on start
@@ -326,6 +327,12 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         {
             Destroy(other.gameObject);
             StartCoroutine(camerapan(other.gameObject));
+        }
+        if (other.gameObject.CompareTag("bossroomdoor"))
+        {
+            Transform r = other.transform.GetChild(0);
+            vcam.LookAt = r;
+            vcam.Follow = r;
         }
     }
 }

@@ -20,6 +20,7 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     public GameObject uniquekey;
     public bool isopen = false;
     public bool isdefended = false;
+    public bool isbossroomdoor = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,7 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     }
     void OnTriggerEnter(Collider other)// trigger detection checks for player keys if the door is set to locked but defaults to open if it isnt locked
     {
+        
         if (islocked)
         {
             if (other.gameObject.CompareTag("Player")&& GameManager.gameManager.itemscollected._currentkeys > 0)

@@ -12,6 +12,7 @@ TagManager:
   - virtual camera
   - uniquekey
   - 2key
+  - bossroomdoor
   layers:
   - Default
   - TransparentFX
