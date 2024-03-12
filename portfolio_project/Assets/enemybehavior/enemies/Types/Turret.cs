@@ -13,6 +13,7 @@ public class Turret : MonoBehaviour
     public GameObject projectile; // The entire bullet
     public LayerMask playerlayer;
     [SerializeField] GameObject death;
+    [SerializeField] AudioSource AttackSound;
 
     public bool InSightRange = false; // for actions relating to being in sight range
     public bool InAttackRange = false; // same as above but for attack range
@@ -46,7 +47,8 @@ public class Turret : MonoBehaviour
         if (!alreadyAttacked)
         {
             Rigidbody rb = Instantiate(projectile, shotPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-
+            AttackSound.pitch = Random.Range(0.5f, 1.3f);
+            AttackSound.Play();
             rb.AddForce(transform.forward * stats.bulletSpeed, ForceMode.Impulse);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), stats.attackSpeed);
@@ -60,6 +62,8 @@ public class Turret : MonoBehaviour
     {
         if (other.CompareTag("Sword"))
         {
+            Instantiate(death, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+
             Invoke(nameof(DestroyEnemy), 0.5f);
             Debug.Log("sword collided");
         }
@@ -67,7 +71,7 @@ public class Turret : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Instantiate(death);
+        
         GameManager.gameManager.itemscollected.addkill();
         this.gameObject.SetActive(false);
     }

@@ -11,13 +11,15 @@ public class BossController : MonoBehaviour
     public bool damaged = false;
     public bool stunned = false;
     public bool attacked = false;
+    bool deadasfuck;
 
     [SerializeField] GameObject particleOne;
     [SerializeField] GameObject particleTwo;
     [SerializeField] GameObject dead;
     [SerializeField] GameObject blue;
-
+    [SerializeField] AudioSource deadNoise;
     [SerializeField] GameObject face;
+    [SerializeField] GameObject deathEnemies;
 
     public GameObject laser;
     public GameObject key;
@@ -37,7 +39,7 @@ public class BossController : MonoBehaviour
 
     [SerializeField] int damageTaken = 0;
 
-    [SerializeField] float attackTimer = 3f;
+    [SerializeField] float attackTimer = 6f;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,17 +50,21 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackTimer -= Time.deltaTime;
-        if (damaged && stunned)
+        if (!deadasfuck)
         {
-            damageTaken += 1;
-            
-            ShowDamage(damageTaken);
-            attackTimer = 3f;
-            damaged = false;
-            stunned = false;
-        }
-        
+
+
+            attackTimer -= Time.deltaTime;
+            if (damaged && stunned)
+            {
+                damageTaken += 1;
+
+                ShowDamage(damageTaken);
+                attackTimer = 6f;
+                damaged = false;
+                stunned = false;
+            }
+
             if (attackTimer <= 0.0f)
             {
                 if (!stunned)
@@ -72,10 +78,11 @@ public class BossController : MonoBehaviour
                             DropAttack();
                             break;
                     }
-                
-                
+
+
                 }
-            attackTimer = 3f;
+                attackTimer = 6f;
+            }
         }
 
 
@@ -133,8 +140,11 @@ public class BossController : MonoBehaviour
                 face.SetActive(true);
                 break;
             case 3:
+                deadasfuck = true;
+
                 // insert escape stuff here
                 dead.SetActive(true);
+                deadNoise.Play();
                 blue.SetActive(true);
                 Debug.Log("boss dead");
                 d1.isdefended = false;
@@ -147,7 +157,8 @@ public class BossController : MonoBehaviour
                 d4.isdefended = false;
                 d3.closing();
                 d4.closing();
-                StartCoroutine(camerapanning(1.2f));
+                StartCoroutine(camerapanning(1));
+                deathEnemies.SetActive(true);
                 break;
         }
     }

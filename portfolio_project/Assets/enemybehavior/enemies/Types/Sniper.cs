@@ -19,6 +19,7 @@ public class Sniper : MonoBehaviour
     public Transform shotPoint; // where the bullet spawns
     public GameObject projectile; // The entire bullet
     public LayerMask playerlayer;
+    [SerializeField] AudioSource AttackSound;
 
     public bool InSightRange; // for actions relating to being in sight range
     public bool InAttackRange; // same as above but for attack range
@@ -67,7 +68,8 @@ public class Sniper : MonoBehaviour
         if (!alreadyAttacked)
         {
             Rigidbody rb = Instantiate(projectile, shotPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-
+            AttackSound.pitch = Random.Range(0.5f, 1.3f);
+            AttackSound.Play();
             rb.AddForce(transform.forward * stats.bulletSpeed, ForceMode.Impulse);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), stats.attackSpeed);
@@ -81,6 +83,8 @@ public class Sniper : MonoBehaviour
     {
         if (other.CompareTag("Sword"))
         {
+            Instantiate(death, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+
             Invoke(nameof(DestroyEnemy), 0.5f);
             Debug.Log("sword collided");
         }

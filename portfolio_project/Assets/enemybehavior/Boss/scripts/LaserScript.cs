@@ -12,6 +12,7 @@ public class LaserScript : MonoBehaviour
     [SerializeField] GameObject laser;
     [SerializeField] destroyself laserScript;
     [SerializeField] GameObject funnyEffect;
+    [SerializeField] AudioSource chargeUpSound;
 
     [SerializeField] float attackTimer = 5f;
     [SerializeField] float returnTimer = 0f;
@@ -32,6 +33,7 @@ public class LaserScript : MonoBehaviour
         if (attackTimer <= 3f && attackTimer > 0f) // checks if the laser is about to fire to create telegraph
         {
             funnyEffect.SetActive(true);
+            chargeUpSound.enabled = true;
         }
         else
         {
