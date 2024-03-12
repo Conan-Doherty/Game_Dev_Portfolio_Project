@@ -16,6 +16,7 @@ TagManager:
   - goal
   - repair
   - treasure
+  - ammo
   layers:
   - Default
   - TransparentFX

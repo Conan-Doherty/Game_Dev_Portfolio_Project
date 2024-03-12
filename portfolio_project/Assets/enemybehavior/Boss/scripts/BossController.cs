@@ -141,7 +141,7 @@ public class BossController : MonoBehaviour
                 break;
             case 3:
                 deadasfuck = true;
-
+                StartCoroutine(camerapanning());
                 // insert escape stuff here
                 dead.SetActive(true);
                 deadNoise.Play();
@@ -157,16 +157,16 @@ public class BossController : MonoBehaviour
                 d4.isdefended = false;
                 d3.closing();
                 d4.closing();
-                StartCoroutine(camerapanning(1));
+                
                 deathEnemies.SetActive(true);
                 break;
         }
     }
-    IEnumerator camerapanning(float time)
+    IEnumerator camerapanning()
     {
         vcam.LookAt = d1.transform;
         vcam.Follow = d1.transform;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(1);
         vcam.LookAt = player.transform;
         vcam.Follow = player.transform;
     }
