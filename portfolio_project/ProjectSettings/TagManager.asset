@@ -15,6 +15,7 @@ TagManager:
   - bossroomdoor
   - goal
   - repair
+  - treasure
   layers:
   - Default
   - TransparentFX
