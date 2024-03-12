@@ -16,7 +16,7 @@ public class Grunt : MonoBehaviour
     public GameObject player;
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject death;
-    
+    [SerializeField] GameObject DropAmmo;
     public NavMeshAgent agent; // This is for pathfinding
 
     private bool alreadyAttacked = false; // important for fire rate
@@ -105,7 +105,10 @@ public class Grunt : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        
+        if (Random.Range(1, 3) == 1)
+        {
+            Instantiate(DropAmmo, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        }
         
         this.gameObject.SetActive(false);
        

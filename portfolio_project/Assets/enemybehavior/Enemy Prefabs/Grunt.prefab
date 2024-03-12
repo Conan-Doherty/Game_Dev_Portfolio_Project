@@ -1441,6 +1441,8 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: 6465524466111390001}
   death: {fileID: 2586533270294756364, guid: 1b6b1741e9d5cf84ca67791fd741ec4a, type: 3}
+  DropAmmo: {fileID: 4695255294136830234, guid: e996bc96eda1b204cb549a32069d41f6,
+    type: 3}
   agent: {fileID: 6237427315125244531}
   shotPoint: {fileID: 1578685621322095378}
   projectile: {fileID: 348705955578551721, guid: 042dd4a932dc6fa49ba502c250cfa67e,
