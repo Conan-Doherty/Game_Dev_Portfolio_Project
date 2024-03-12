@@ -68,6 +68,7 @@ public class Turret : MonoBehaviour
     private void DestroyEnemy()
     {
         Instantiate(death);
+        GameManager.gameManager.itemscollected.addkill();
         this.gameObject.SetActive(false);
     }
 }

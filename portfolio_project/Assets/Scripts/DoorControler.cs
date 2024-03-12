@@ -21,10 +21,15 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     public bool isopen = false;
     public bool isdefended = false;
     public bool isbossroomdoor = false;
+    public AudioSource a;
+   
     // Start is called before the first frame update
     void Start()
     {
-        
+        a= GetComponent<AudioSource>();
+        a.loop= false;
+        a.playOnAwake= false;
+       
     }
 
     // Update is called once per frame
@@ -85,16 +90,24 @@ public class DoorControler : MonoBehaviour // doors lacked usable animations so 
     public IEnumerator open()//times the opening
     {
         isopening= true;
+        a.Play();
         yield return new WaitForSeconds(openclosedelay);
+        a.Stop();
         isopen = true;
         isopening= false;
+    }
+    public void closing()
+    {
+        StartCoroutine(close());
     }
     IEnumerator close()//times the closing
     {
         if (isopen) 
         {
             isclosing = true;
+            a.Play();
             yield return new WaitForSeconds(openclosedelay);
+            a.Stop();
             isclosing = false;
             isopen= false;
         }

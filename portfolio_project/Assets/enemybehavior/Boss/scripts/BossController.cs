@@ -141,6 +141,12 @@ public class BossController : MonoBehaviour
                 d2.isdefended = false;
                 d1.opening();
                 d2.opening();
+                d5.isdefended = false;
+                d5.opening();
+                d3.isdefended = true;
+                d4.isdefended = false;
+                d3.closing();
+                d4.closing();
                 StartCoroutine(camerapanning(1.2f));
                 break;
         }

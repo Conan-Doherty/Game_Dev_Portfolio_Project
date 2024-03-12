@@ -41,7 +41,8 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     public Transform target;
     public GameObject swordobj;
     Collider swordcol;
-    
+    public AudioSource dashnoise;
+    public AudioSource shingnoise;
     // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()//grabs/creates instances on start
@@ -105,6 +106,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         {
             animator.SetBool("Ismoving", true);
             animator.SetBool("IsDashing", true);
+            dashnoise.Play();
             Speed = 16f;
             Dashamount--;
             StartCoroutine(resetspeed());
@@ -176,6 +178,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     {
         if(canparry)
         {
+            shingnoise.Play();
             isparrying = true;
             canparry= false;
             parryuiobj.SetActive(false);
@@ -309,6 +312,9 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
         }
         if (other.gameObject.CompareTag("bossroomdoor"))
         {
+            DoorControler gb = other.gameObject.GetComponent<DoorControler>();
+            gb.isdefended = false;
+            gb.opening();
             Transform r = other.transform.GetChild(0);
             vcam.LookAt = r;
             vcam.Follow = r;
