@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         
         
        
-        score.text = "Score: " + (itemscollected._currentkills * itemscollected._currenttreasure) * 100;
+       
         
        
         
@@ -97,6 +97,9 @@ public class GameManager : MonoBehaviour
     public void GoalReached()
     {
         Winmenu.SetActive(true);
+        int Score = itemscollected._currentkills + itemscollected._currenttreasure;
+        score.text = "Score: " + Score * 100;
+        Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
 
     }

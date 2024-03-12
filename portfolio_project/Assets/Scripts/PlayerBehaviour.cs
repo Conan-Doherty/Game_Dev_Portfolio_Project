@@ -277,7 +277,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
             PlayerPickupintel();
             Destroy(other.gameObject);
         }
-
+       
         if (other.gameObject.CompareTag("repair"))
         {
             Playerhealdmg(50);
@@ -307,10 +307,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
             Destroy(other.gameObject);
             StartCoroutine(camerapan(other.gameObject));
         }
-        if (other.gameObject.CompareTag("goal"))
-        {
-            GameManager.gameManager.GoalReached();
-        }
+        
         if (other.gameObject.CompareTag("bossroomdoor"))
         {
             DoorControler gb = other.gameObject.GetComponent<DoorControler>();
@@ -319,6 +316,12 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
             Transform r = other.transform.GetChild(0);
             vcam.LookAt = r;
             vcam.Follow = r;
+        }
+        if (other.gameObject.CompareTag("goal"))
+        {
+            
+            Debug.Log("goalreached");
+            GameManager.gameManager.GoalReached();
         }
     }
 }

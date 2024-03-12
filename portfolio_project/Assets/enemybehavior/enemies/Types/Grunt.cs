@@ -51,7 +51,7 @@ public class Grunt : MonoBehaviour
             ChasePlayer();
         } // set unit to pathfind to player until within attack range
         // this is just a quick animation set up to make up for problems with the old models. (future me, write down magnitude because I know you'll forget)
-        Debug.Log(rb.velocity.magnitude);
+       
         if (agent.velocity.magnitude > 0) 
         {
             
@@ -105,10 +105,11 @@ public class Grunt : MonoBehaviour
         //Instantiate(death);
         
         this.gameObject.SetActive(false);
-        door.deadnumber++;
+       
         GameManager.gameManager.itemscollected.addkill();
         if (door != null)
         {
+            door.deadnumber++;
             door.deadcheck();
         }
 
