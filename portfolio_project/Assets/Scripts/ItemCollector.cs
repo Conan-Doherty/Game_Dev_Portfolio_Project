@@ -44,7 +44,7 @@ public class ItemCollector // script used for creating a instance of a item coll
     }
     public void addammo()
     {
-        _currentammo = _currentammo + 1;
+        _currentammo++;
     }
     public void removeammo()
     {

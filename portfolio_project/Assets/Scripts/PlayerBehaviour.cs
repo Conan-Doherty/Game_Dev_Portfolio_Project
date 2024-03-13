@@ -267,22 +267,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
            
             Destroy(other.gameObject);
         }
-        if (other.gameObject.CompareTag("ammo"))
-        {
-            PlayerPickupammo();
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("treasure"))
-        {
-            PlayerPickupintel();
-            Destroy(other.gameObject);
-        }
        
-        if (other.gameObject.CompareTag("repair"))
-        {
-            Playerhealdmg(50);
-            Destroy(other.gameObject);
-        }
         
     }
     IEnumerator camerapan(GameObject other)// this enumerator will be used to control camera changes 
@@ -322,6 +307,22 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
             
             Debug.Log("goalreached");
             GameManager.gameManager.GoalReached();
+        }
+        if (other.gameObject.CompareTag("ammo"))
+        {
+            PlayerPickupammo();
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("treasure"))
+        {
+            PlayerPickupintel();
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("repair"))
+        {
+            Playerhealdmg(50);
+            Destroy(other.gameObject);
         }
     }
 }
