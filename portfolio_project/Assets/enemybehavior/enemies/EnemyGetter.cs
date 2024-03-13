@@ -55,7 +55,7 @@ public class EnemyGetter // Script Purpose: To have all of the stats of the enem
             case 2: //Turret
                 walkSpeed = 0;
                 attackSpeed = 1;
-                bulletSpeed = 15;
+                bulletSpeed = 11;
                 sightRange = 15;
                 willChase = false;
                 break;
