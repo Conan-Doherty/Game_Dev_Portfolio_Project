@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
             itemscollected._currentkills = PlayerPrefs.GetInt("kills");
             itemscollected._currenttreasure = PlayerPrefs.GetInt("Treasure");
         }
-        
+        GameManager.gameManager.itemscollected._currentammo = 3;
         if (gameManager != null && gameManager != this)
         {
             Destroy(this);
