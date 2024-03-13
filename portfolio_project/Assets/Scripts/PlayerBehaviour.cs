@@ -43,6 +43,7 @@ public class PlayerBehaviour : MonoBehaviour//main player control script
     Collider swordcol;
     public AudioSource dashnoise;
     public AudioSource shingnoise;
+    
     // public AudioSource pickup;
     // Start is called before the first frame update
     void Start()//grabs/creates instances on start

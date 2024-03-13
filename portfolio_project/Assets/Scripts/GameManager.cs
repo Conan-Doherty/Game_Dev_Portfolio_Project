@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public ItemCollector itemscollected = new ItemCollector(0, 0,3);
     public TextMeshProUGUI score;
-  
-    
+
+    public bool isfirstlevel;
     
     
     float completetime = 0f;
@@ -22,11 +22,20 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        
         if (PlayerPrefs.HasKey("kills"))
         {
-            itemscollected._currentammo = PlayerPrefs.GetInt("ammo");
-            itemscollected._currentkills = PlayerPrefs.GetInt("kills");
-            itemscollected._currenttreasure = PlayerPrefs.GetInt("Treasure");
+            if (isfirstlevel)
+            {
+                PlayerPrefs.DeleteAll();
+            }
+            else
+            {
+                itemscollected._currentammo = PlayerPrefs.GetInt("ammo");
+                itemscollected._currentkills = PlayerPrefs.GetInt("kills");
+                itemscollected._currenttreasure = PlayerPrefs.GetInt("Treasure");
+            }
+            
         }
         if (gameManager != null && gameManager != this)
         {
